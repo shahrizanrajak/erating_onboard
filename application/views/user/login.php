@@ -34,13 +34,13 @@
         <div class="login-logo">
           <img src="<?php echo base_url(); ?>templates/images/login-header.jpg">
         </div>        
-        <p class="login-box-msg">Log Masuk untuk memulakan sesi anda v1</p>
-        <form action="<?php echo base_url(); ?>logmasuk.php/login-validate" method="post">
+        <p class="login-box-msg">Log Masuk untuk memulakan sesi anda</p>
+        <form action="<?php echo base_url(); ?>index.php/login-validate" method="post">
           <!--<input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">-->
           <input type="hidden" name="login-key" id="login-key" value="<?php echo uniqid(); ?>">
           <div class="form-group has-feedback">
             <!-- <input type="email" name="email" class="form-control" placeholder="Email" /> -->
-            <input type="text" name="loginname" class="form-control" placeholder="Kad Pengenalan" />
+            <input type="text" name="loginname" class="form-control" placeholder="Kad Pengenalan / Nama Pengguna" />
             <span class="glyphicon glyphicon-user form-control-feedback"></span>
           </div>
           <div class="form-group has-feedback">

@@ -26,7 +26,7 @@
       
                         
         <!-- Logo -->
-        <a href="<?php echo base_url(); ?>" class="logo">
+        <a href="<?php echo base_url(); ?>index.php/dashboard" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <span class="logo-mini">+</span>
           <!-- logo for regular state and mobile devices -->
@@ -65,7 +65,7 @@
                       <a href="#" class="btn btn-default btn-flat">Profile</a>
                     </div>
                     <div class="pull-right">
-                      <a href="<?php echo base_url(); ?>logmasuk.php/logout" class="btn btn-default btn-flat">Sign out</a>
+                      <a href="<?php echo base_url(); ?>index.php/logout" class="btn btn-default btn-flat">Sign out</a>
                     </div>
                   </li>
                 </ul>
@@ -89,20 +89,20 @@
             </div>
           </div>
           <!-- search form -->
-          <form action="#" method="get" class="sidebar-form">
+         <!--  <form action="#" method="get" class="sidebar-form">
             <div class="input-group">
               <input type="text" name="q" class="form-control" placeholder="Search..." />
               <span class="input-group-btn">
                 <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
               </span>
             </div>
-          </form>
+          </form> -->
           <!-- /.search form -->
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
             <li>
-              <a href="<?php echo base_url(); ?>logmasuk.php/dashboard">
+              <a href="<?php echo base_url(); ?>index.php/dashboard">
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
               </a>
             </li>
@@ -114,24 +114,24 @@
               </a>
               <ul class="treeview-menu">
                 <li><a href="#" id="erating-new"><i class="fa fa-university"></i> Daftar Agensi</a></li>
-                <li><a href="<?php echo base_url(); ?>logmasuk.php/erating-list"><i class="fa fa-user-plus"></i> Kemaskini Pengguna</a></li>
+                <li><a href="<?php echo base_url(); ?>index.php/erating-list"><i class="fa fa-user-plus"></i> Kemaskini Pengguna</a></li>
                
               </ul>
             </li>    
             <li class="treeview">
-              <a href="<?php echo base_url(); ?>logmasuk.php/configuration">
+              <a href="<?php echo base_url(); ?>index.php/configuration">
                 <i class="fa fa-cog"></i>
                 <span>Tetapan Sistem</span>
               </a>
             </li>                      
             <li>
-              <a href="<?php echo base_url(); ?>logmasuk.php/report">
+              <a href="<?php echo base_url(); ?>index.php/report">
                 <i class="fa fa-bar-chart"></i>
                 <span>Laporan</span>                
               </a>
             </li> 
             <li>
-              <a href="<?php echo base_url(); ?>logmasuk.php/user">
+              <a href="<?php echo base_url(); ?>index.php/user">
                 <i class="fa fa-user"></i> <span>Maklumat Diri</span>
               </a>
             </li>                        
@@ -145,11 +145,11 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Tetapan Antaramuka
+            Tetapan Antaramukaed
             <small>Mengikut agensi berdaftar</small>
           </h1>          
           <ol class="breadcrumb">
-            <li><a href="<?php echo base_url(); ?>logmasuk.php/dashboard"><i class="fa fa-dashboard"></i> Utama</a></li>
+            <li><a href="<?php echo base_url(); ?>index.php/dashboard"><i class="fa fa-dashboard"></i> Utama</a></li>
             <li class="active">Tetapan</li>
           </ol>
         </section> 
@@ -209,7 +209,7 @@
         <div class="pull-right hidden-xs">
           <b>Version</b> 1.0
         </div>
-        <strong>Copyright &copy; 2016 <a href="<?php echo mydomain; ?>">E-Rating Development Team</a>.</strong> All rights reserved.
+        <strong>Copyright &copy; 2016 <a href="<?php echo base_url(); ?>index.php/dashboard">E-Rating Development Team</a>.</strong> All rights reserved.
       </footer>
 
       <!-- Control Sidebar -->

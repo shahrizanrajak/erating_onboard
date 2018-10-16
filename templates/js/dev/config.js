@@ -16,7 +16,7 @@
           "processing": false,
           "sAjaxDataProp":"",
           "serverSide": false,          
-          "ajax": domain+'logmasuk.php/api/list-smiley',
+          "ajax": domain+'index.php/api/list-smiley',
           "autoWidth": true,
           "columns": [              
               { "data": "Id_Smiley" },
@@ -46,7 +46,7 @@
           "processing": false,
           "sAjaxDataProp":"",
           "serverSide": false,          
-          "ajax": domain+'logmasuk.php/api/list-question',
+          "ajax": domain+'index.php/api/list-question',
           "autoWidth": true,
           "columns": [              
               { "data": "Id_Soalan" },
@@ -111,7 +111,7 @@
           $.ajax({
               type: "GET",
               datatype: "jsonp",                            
-              url: domain+"logmasuk.php/api/get-question/"+questionId,
+              url: domain+"index.php/api/get-question/"+questionId,
               // data: {data: jsonData},                                                                 
               success: function(data) {
                   console.log('User Details: ' + data); 
@@ -144,7 +144,7 @@
 
           $.ajax({
               type: "POST",                
-              url: domain+"logmasuk.php/erating-update-question",                                               
+              url: domain+"index.php/erating-update-question",                                               
               data: {data: jsonData},              
               success: function(data) {
                   // $(".modal-header #label-rekod").text('#' + setIdSection);                   
@@ -183,7 +183,7 @@
 
           $.ajax({
               type: "POST",                
-              url: domain+"logmasuk.php/erating-update-smiley",                                               
+              url: domain+"index.php/erating-update-smiley",                                               
               data: {data: jsonData},              
               success: function(data) {
                   // $(".modal-header #label-rekod").text('#' + setIdSection);                   
@@ -229,7 +229,7 @@
           $.ajax({
               type: "GET",
               datatype: "jsonp",                            
-              url: domain+"logmasuk.php/api/get-smiley/"+smileyId,
+              url: domain+"index.php/api/get-smiley/"+smileyId,
               // data: {data: jsonData},                                                                 
               success: function(data) {
                   console.log('User Details: ' + data); 
@@ -309,7 +309,7 @@
 
                 $.ajax({    
                     type: "POST",                
-                    url: domain+"logmasuk.php/image-set",                                               
+                    url: domain+"index.php/image-set",                                               
                     data: {data: jsonData},              
                     // data: {'csrf_erating_token':token, data: jsonData},              
                     success: function(data) {        
@@ -333,7 +333,7 @@
           $.ajax({
               type: "GET",
               datatype: "jsonp",                            
-              url: domain+"logmasuk.php/api/image-get/"+type+"/"+parentid,   
+              url: domain+"index.php/api/image-get/"+type+"/"+parentid,   
               // data: {name},                                                                        
               success: function(data) {                  
                   JsonEratingData = jQuery.parseJSON(data); //JSON.stringify(data);   

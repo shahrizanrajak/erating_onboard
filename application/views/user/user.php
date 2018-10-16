@@ -62,7 +62,7 @@
                       <a href="#" class="btn btn-default btn-flat">Profile</a>
                     </div>
                     <div class="pull-right">
-                      <a href="<?php echo base_url(); ?>logmasuk.php/logout" class="btn btn-default btn-flat">Sign out</a>
+                      <a href="<?php echo base_url(); ?>index.php/logout" class="btn btn-default btn-flat">Sign out</a>
                     </div>
                   </li>
                 </ul>
@@ -87,37 +87,37 @@
             </div>
           </div>
           <!-- search form -->
-          <form action="#" method="get" class="sidebar-form">
+         <!--  <form action="#" method="get" class="sidebar-form">
             <div class="input-group">
               <input type="text" name="q" class="form-control" placeholder="Search..." />
               <span class="input-group-btn">
                 <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
               </span>
             </div>
-          </form>
+          </form> -->
           <!-- /.search form -->
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
             <li class="treeview">
-              <a href="<?php echo base_url(); ?>logmasuk.php/user-dashboard">
+              <a href="<?php echo base_url(); ?>index.php/user-dashboard">
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
               </a>
             </li> 
             <li class="treeview">
-              <a href="<?php echo base_url(); ?>logmasuk.php/user-report">
+              <a href="<?php echo base_url(); ?>index.php/user-report">
                 <i class="fa fa-bar-chart"></i>
                 <span>Laporan</span>                
               </a>
             </li> 
             <li class="treeview active">
-              <a href="<?php echo base_url(); ?>logmasuk.php/user-user">
+              <a href="<?php echo base_url(); ?>index.php/user-user">
                 <i class="fa fa-user"></i>
                 <span>Maklumat Diri</span>                
               </a>
             </li>          
             <li class="treeview">
-              <a href="<?php echo base_url(); ?>logmasuk.php/display/<?php echo $this->session->userdata('agency');?>">
+              <a href="<?php echo base_url(); ?>index.php/display/<?php echo $this->session->userdata('agency');?>">
                 <i class="fa fa-smile-o"></i> <span>Paparan</span>
               </a>
             </li>
@@ -135,7 +135,7 @@
             <!-- <small>Mengikut agensi berdaftar</small> -->
           </h1>          
           <ol class="breadcrumb">
-            <li><a href="<?php echo base_url(); ?>logmasuk.php/dashboard"><i class="fa fa-dashboard"></i> Utama</a></li>
+            <li><a href="<?php echo base_url(); ?>index.php/dashboard"><i class="fa fa-dashboard"></i> Utama</a></li>
             <li class="active">Maklumat Diri</li>
           </ol>
         </section> 
@@ -265,7 +265,7 @@
           $.ajax({
               type: "GET",
               datatype: "jsonp",                            
-              url: "/logmasuk.php/user-details/"+uId,
+              url: "/index.php/user-details/"+uId,
               // data: {data: jsonData},                                                                 
               success: function(data) {
                   console.log('User Details: ' + data); 

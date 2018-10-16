@@ -27,7 +27,34 @@ class User_model extends CI_Model {
         $query = $this->db->get();      
 
         return $query->result_array();
-    }       
+    }   
+
+      public function list_by_agency_sortname($id = NULL)
+    {
+        $this->db->cache_off();
+        $this->db->select('id_pengguna, UPPER(nama) as nama');
+        $this->db->from('pengguna');
+        $this->db->where('agensi_id', $id); 
+        $this->db->order_by("UPPER(nama)","asc"); 
+
+        $query = $this->db->get();      
+
+        return $query->result_array();
+    }      
+
+    public function list_by_agency_counter($id = NULL)
+    {
+        $this->db->cache_off();
+        $this->db->select('pengguna.id_pengguna, pengguna.nama, pengguna.tahap, photo.photo');
+        $this->db->from('pengguna');
+        $this->db->join('photo', 'pengguna.id_pengguna = photo.parentid', 'left'); 
+        $this->db->where('pengguna.agensi_id', $id);  
+        $this->db->where('pengguna.tahap', 'Kaunter');  
+        $this->db->where('status', 'A');  
+        $query = $this->db->get();      
+
+        return $query->result_array();
+    } 
 
 	public function validate($data)
 	{		
@@ -35,8 +62,24 @@ class User_model extends CI_Model {
         if ($data) 
         {
             $this->db->cache_off();
-            $query = $this->db->get_where('pengguna', array('kad_pengenalan' => $data['loginname'], 'kata_laluan' => $data['password'], 'status' => 'A'));		
-    		$result = $query->row_array();
+            if (($data['loginname'] == '') || ($data['password']==''))
+            {
+                return false;
+            }
+            $query = $this->db->get_where('pengguna',  array('kad_pengenalan' => $data['loginname'], 'kata_laluan' => $data['password'], 'status' => 'A'));
+
+          	$result = $query->row_array();
+
+
+            // $this->db->cache_off();
+            // $this->db->select('pengguna.tahap, jabatan.Jabatan, jabatan.Kod_Jab');
+            // $this->db->from('pengguna');
+            // $this->db->join('jabatan', 'jabatan.Kod_Jab = pengguna.agensi_id', 'left'); 
+            // $this->db->where('kad_pengenalan',$data['loginname']);  
+            // $this->db->where('kata_laluan', $data['password']);  
+            // $this->db->where('pengguna.status', 'A');
+            // $query = $this->db->get(); 
+            // $result = $query->result_array();
 
             if ($result) {        
                 // Update user log - login
@@ -112,7 +155,9 @@ class User_model extends CI_Model {
     {           
         $this->db->where('id_pengguna', $data['uid']);
         $result = $this->db->delete('pengguna');
-       
+
+        // echo $this->db->last_query();    //print last query
+        
         return $result;     
     }       
 
@@ -141,14 +186,19 @@ class User_model extends CI_Model {
         return $query->row_array();     
     }    
 
-// Perubahan 31-10-2017
+   
+
+
+
+
+
     public function find_user_by_ic($ic = NULL)
     {           
         $this->db->cache_off();
         $this->db->select('*');
         $this->db->from('pengguna');   
-        $this->db->where('kad_pengenalan', ''. $ic .'' );   
-        $this->db->where('status', 'A' );  
+        $this->db->where('kad_pengenalan', ''. $ic .'');   
+        $this->db->where('status', 'A');   
         $query = $this->db->get();
        
         return $query->row_array();     
@@ -224,7 +274,15 @@ class User_model extends CI_Model {
 
     public function stats_user_active()
     {        
-      $this->db->cache_off();   
+        // $query = $this->db->query("SELECT * FROM pengguna WHERE status='A'");
+
+        // return $query->num_rows();  
+
+        // $this->db->select('COUNT(id_pengguna)');
+        // $this->db->from('pengguna');
+        // $this->db->where('Status', 'A'); 
+
+        $this->db->cache_off();   
         
         $this->db->select('COUNT(DISTINCT user_log.user_id)');
         $this->db->from('user_log');
@@ -236,13 +294,76 @@ class User_model extends CI_Model {
             $this->db->like('pengguna.agensi_id', substr($this->session->userdata('agency'), 0, 3), 'after');            
         }
 
-        $query = $this->db->get();
+        $query = $this->db->get();        
         $row = $this->db->last_query();
         $result = implode(" ",$query->row_array());
 
         // echo $this->db->last_query(); 
 
         return  $result;         
-    }             
+    }     
+
+    public function update_inactive_session()
+    {           
+        // $data = array(
+        //     'user_id' => substr(time(), -2),
+        //     'session_id' => time(),
+        //     'date_logout' => date("Y-m-d H:i:s", time()),
+        //     'status' => 1
+        // );
+
+        // $result = $this->db->insert('user_log', $data);     
+
+        $this->db->set('date_logout', date("Y-m-d H:i:s", time()));
+        $this->db->set('status', 3);
+        $this->db->where('user_id', '2358');
+        $this->db->where('session_id', '5912ce3f80888');
+        
+        $result = $this->db->update('user_log');           
+
+        if ($result) {
+            return $result; 
+        } else {
+            throw new Exception('error in query');
+            return false;
+        }    
+    }
+
+    public function save_rate_mobile($agency, $user, $picked, $qr='qr', $soalan)
+    {
+        $items = null; $values = null;     
+        $sessionid = md5(uniqid(rand()));   
+       
+        $items .= "agency_id,";
+        $values .= "'". $agency ."',";
+
+        $items .= "user_id,";
+        $values .= "'". $user ."',";   
+
+        $items .= "picked,";
+        $values .= "'". $picked ."',";   
+
+         $items .= "reason,";
+        $values .= "'". $soalan ."',";           
+
+        // Generete unique session id
+        $items .= "session_id,";
+        $values .= "'". $sessionid ."',";
+
+        // status mobile qr
+        $items .= "qr,";
+        $values .= "'". $qr ."',";
+
+        // Insert Date Updated
+        $items .= "date_update,";
+        $values .= "'". date("Y-m-d H:i:s", time()) ."',";
+
+        $qitems = substr($items, 0, -1);
+        $qvalues = substr($values, 0, -1);                
+
+        $result = $this->db->query("INSERT INTO rateit (".$qitems.") VALUES (".$qvalues.")");              
+            
+        return $result;
+    }                  
 }
 

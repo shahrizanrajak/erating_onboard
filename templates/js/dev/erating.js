@@ -3,7 +3,7 @@
         var domain = $('#domain').val();
         var base_url = $('#base_url').val();
         var json_data = $('#json_data').val();            
-        var jsonData = domain+'logmasuk.php/'+json_data;
+        var jsonData = domain+'index.php/'+json_data;
         var setLoginId = $('#loginId').val();
         var setAgencyId = $('#recordId').val();  
 
@@ -100,7 +100,7 @@
           "dom": 'lBfrtip',  // lBrtip // ref > https://datatables.net/examples/basic_init/dom.html
           "buttons": [
                 {
-                    text: 'Tambah nasi',                    
+                    text: 'Tambah',                    
                     action: function ( e, dt, node, config ) {
                         // alert( 'Button activated' ); 
                         $('#frmUserInfo')[0].reset(); 
@@ -124,6 +124,7 @@
           ]
         });      
 
+     
         // this function will reload data tabla automatically every 30 sec
         // reference: https://datatables.net/reference/api/ajax.reload()
         setInterval( function () {
@@ -183,7 +184,7 @@
           $.ajax({
               type: "GET",
               datatype: "jsonp",                            
-              url: domain+"logmasuk.php/department-by-ministry/"+UserMinistryValue,
+              url: domain+"index.php/department-by-ministry/"+UserMinistryValue,
               //data: {name},                                                                
               success: function(data) {
                   $('#dropdownDepartmentAssign').empty();
@@ -214,7 +215,7 @@
           $.ajax({
               type: "GET",
               datatype: "jsonp",                            
-              url: domain+"logmasuk.php/branch-by-department/"+UserDepartmentValue,
+              url: domain+"index.php/branch-by-department/"+UserDepartmentValue,
               //data: {name},                                                                
               success: function(data) {
                   $('#dropdownBranchAssign').empty();
@@ -289,7 +290,7 @@
           $.ajax({
               type: "GET",
               datatype: "jsonp",                            
-              url: domain+"logmasuk.php/erating-details/"+setAgencyId,
+              url: domain+"index.php/erating-details/"+setAgencyId,
               // data: {data: jsonData},                                                                 
               success: function(data) {
                   console.log('Erating Details: ' + data); 
@@ -350,7 +351,7 @@
 
           $.ajax({
               type: "POST",                
-              url: domain+"logmasuk.php/erating-save-agency",                                               
+              url: domain+"index.php/erating-save-agency",                                               
               data: {data: jsonData},              
               success: function(data) {
                   $(".modal-header #label-rekod").text('#' + setIdSection);                   
@@ -383,7 +384,7 @@
 
           $.ajax({
               type: "POST",                
-              url: domain+"logmasuk.php/erating-update-agency",                                               
+              url: domain+"index.php/erating-update-agency",                                               
               data: {data: jsonData},              
               success: function(data) {
                   tblList.ajax.reload();
@@ -408,7 +409,7 @@
 
           $.ajax({
               type: "POST",                
-              url: domain+"logmasuk.php/erating-save-config",                                               
+              url: domain+"index.php/erating-save-config",                                               
               data: {data: jsonData},              
               success: function(data) {                                  
                   $('.modal-body #recordId').val(setAgencyId);
@@ -426,7 +427,34 @@
           });
         }); 
 
-        // Save User
+
+        // button Qrcode
+
+
+
+        $('#btnGenerateQrcode').click(function() {   
+          // alert('yes');
+          var uId = $('#userId').val();  
+
+          //window.open('http://localhost/erating/index.php/qrcode/'+uId, '_blank');
+          url = "<img src='/erating/index.php/qrcode/"+uId+"' width='100px'>"; 
+          url2 = "/index.php/dashboard"; 
+          $('.modal-body #qr_image_preview').html(url);
+          $('.modal-body #qr_image_preview').load(url2); //test functionn load
+         });
+
+        // button Cetak
+
+        $('#btnCetak').click(function() {
+
+            alert('Sila Masukkan Gambar')  
+
+            var uId = $('#userId').val();        
+            window.open("/erating/index.php/qrcodepdf/" + uId); 
+               
+        });
+
+        
         $('#btnSaveUser').click(function() {   
           // var token = $('#csrf_erating_token').val();
           var uId = $('#userId').val();   
@@ -446,12 +474,12 @@
 
           if ((uId == null) || (uId == "")) {
             jsonData = '{"kad_pengenalan":"'+ setIc +'","kata_laluan":"'+ setPwd +'","nama":"'+ setName +'","jawatan":"'+ setPost +'","emel":"'+ setEmail +'","no_telefon":"'+ setPhone +'","tahap":"'+ setAccess +'","status":"'+ setStatus +'","agensi_id":"'+ setAgencyId +'"}';
-            jsonCall = domain+"logmasuk.php/user-save";
+            jsonCall = domain+"index.php/user-save";
             actions = 'Initialiazing actions...';
           } else {
             jsonData = '{"id_pengguna":"'+ uId +'","kad_pengenalan":"'+ setIc +'","kata_laluan":"'+ setPwd +'","nama":"'+ setName +'","jawatan":"'+ setPost +'","emel":"'+ setEmail +'","no_telefon":"'+ setPhone +'","tahap":"'+ setAccess +'","status":"'+ setStatus +'","agensi_id":"'+ setAgencyId +'"}';
-            jsonCall = domain+"logmasuk.php/user-update";
-            actions = '<a href="#" class="user_preview" id="'+ uId+'">Lihat</a> / <a href="" class="user_remove" id="'+ uId+'">Padam</a>';
+            jsonCall = domain+"index.php/user-update";
+            actions = '<a href="#" class="user_preview" id="'+ uId+'">Lihated</a> / <a href="" class="user_remove" id="'+ uId+'">Padam</a>';
           }
 
           $.ajax({    
@@ -470,8 +498,10 @@
                   alert('Unable to process this request..');                                                     
               }
           });
-        });        
+        });    
 
+
+        
         // Save User
         $('#btnRemoveUser').click(function() {        
           var uId = $('#confirm-remove span').text(); 
@@ -484,7 +514,7 @@
 
           $.ajax({    
               type: "POST",                
-              url: domain+"logmasuk.php/user-remove",
+              url: domain+"index.php/user-remove",
               data: {data: jsonData},              
               // data: {'csrf_erating_token':token, data: jsonData},              
               success: function(data) {        
@@ -520,8 +550,16 @@
             var data = $(this).attr('id');                     
 
             $(".modal-body #userId").val(data);
+            //document.getElementById("btnCetak").disabled = true;
+            //document.getElementById("btnCetak").style.display = "none";
+            document.getElementById("qr_image_preview").style.display ="none";
+            document.getElementById("btnCetak").style.display ="none";
+            document.getElementById("btnGenerateQrcode").style.display ="initial";
+
             $('#addUserModal').modal('show');
-        });       
+        });
+
+            
 
         // Preview User Record
         $('#tblListUser tbody').on( 'click', 'a.user_remove', function (e) {
@@ -532,6 +570,8 @@
             $("#confirm-remove span").text(data);  
             $('#removeUserModal').modal('show');          
         });  
+
+        
 
         $('#addUserModal').on('show.bs.modal', function (event) {
           var uId = $('#userId').val();          
@@ -555,7 +595,7 @@
           $.ajax({
               type: "GET",
               datatype: "jsonp",                            
-              url: domain+"logmasuk.php/user-details/"+uId,
+              url: domain+"index.php/user-details/"+uId,
               // data: {data: jsonData},                                                                 
               success: function(data) {
                   console.log('User Details: ' + data); 
@@ -601,7 +641,7 @@
             $.ajax({
               type: "GET",
               datatype: "jsonp",                            
-              url: domain+"logmasuk.php/api/user-list-by-agency/"+agencyId,   
+              url: domain+"index.php/api/user-list-by-agency/"+agencyId,   
               //data: {name},                                                                        
               success: function(data) {
                     tblListUser.clear().draw();
@@ -680,7 +720,7 @@
 
                 $.ajax({    
                     type: "POST",                
-                    url: domain+"logmasuk.php/image-set",                                               
+                    url: domain+"index.php/image-set",                                               
                     data: {data: jsonData},              
                     // data: {'csrf_erating_token':token, data: jsonData},              
                     success: function(data) {        
@@ -704,7 +744,7 @@
           $.ajax({
               type: "GET",
               datatype: "jsonp",                            
-              url: domain+"logmasuk.php/api/image-get/"+type+"/"+parentid,   
+              url: domain+"index.php/api/image-get/"+type+"/"+parentid,   
               // data: {name},                                                                        
               success: function(data) {                  
                   JsonEratingData = jQuery.parseJSON(data); //JSON.stringify(data);   
@@ -729,7 +769,7 @@
           $.ajax({
               type: "GET",
               datatype: "jsonp",                            
-              url: domain+"logmasuk.php/api/config-agency/"+agencyId,   
+              url: domain+"index.php/api/config-agency/"+agencyId,   
               // data: {name},                                                                        
               success: function(data) {                  
                   JsonEratingData = jQuery.parseJSON(data); //JSON.stringify(data);   

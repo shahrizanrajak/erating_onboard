@@ -64,8 +64,36 @@ class Report extends CI_Controller {
 		$this->load->view('admin/header');
 		$this->load->view('report/report', $data);		
 		$this->load->view('admin/footer');
-	}		
+	}
 
+	// start report pengguna
+
+	public function coor_report() 
+	{								
+		$data['ministry_data']	=  $this->ministry_model->list_all();
+		$data['question_data'] = $this->question_model->list_active();
+		$data['user_data'] = $this->user_model->list_all();
+		// $data['report_type'] = 'administrator';
+
+		// get user photo	
+		if ($avatar = $this->photo_model->get_photo('photo', $this->session->userdata('logged_id'))) {
+			$data['avatar'] = $avatar['photo'];
+		} else {
+			$data['avatar'] = base_url().'templates/adminlte/dist/img/avatar.png';
+		}				
+
+		// Define JSON API
+		$data['status_type'] = 'Data eRating Mengikut Agensi';
+		// $data['json_data'] = 'api/report-data';		
+
+		$this->load->view('admin/header');
+		$this->load->view('report/coor-report', $data);		
+		$this->load->view('admin/footer');
+	}		
+	
+	// end report pengguna
+
+	// start report penyelia
 	public function user_report() 
 	{								
 		$data['ministry_data']	=  $this->ministry_model->list_all();
@@ -88,7 +116,8 @@ class Report extends CI_Controller {
 		$this->load->view('report/report', $data);		
 		$this->load->view('admin/footer');
 	}		
-
+	// end report penyelia
+	
 	// public function report_data() 
 	// {
 	// 	$report_data = $this->rate_model->list_all();				
@@ -103,9 +132,11 @@ class Report extends CI_Controller {
 		
 		$id = $data[0];
 
-		if (empty($data[1]) && empty($data[2])) { $start = 'null'; $end = 'null'; } else { $start = $data[1]; $end = $data[2]; }	
+		if (empty($data[1]) && empty($data[2])) { $start = 'null'; $end = 'null'; } else { $start = $data[1]; $end = $data[2]; }
+		$petugas = $data[3] ;	
 				
-		$report_data = $this->rate_model->list_filter($id, $start, $end);							
+		$report_data = $this->rate_model->list_filter($id, $start, $end, $petugas);	
+								
 
 		echo json_encode($report_data);
 	}
@@ -136,7 +167,45 @@ class Report extends CI_Controller {
 		$report_data = $this->rate_model->list_filter_feedback($id, $start, $end);				
 		
 		echo json_encode($report_data);
+	}	
+
+	// laporan purata
+
+	public function report_laporan_purata($id = NULL) 
+	{				
+		// Extract to get Id, Start Date & End Date	
+		$data = explode('_', $id);	
+		
+		$id = $data[0];
+
+		if (empty($data[1]) && empty($data[2])) { $start = 'null'; $end = 'null'; } else { $start = $data[1]; $end = $data[2]; }	
+
+		$report_data = $this->rate_model->list_filter_laporan_purata($id, $start, $end);				
+		
+		echo json_encode($report_data);
 	}		
+
+	// End laporan purata
+
+	// laporan keseluruhan
+
+	public function report_laporan_keseluruhan($id = NULL) 
+	{				
+		// Extract to get Id, Start Date & End Date	
+		$data = explode('_', $id);	
+		
+		$id = $data[0];
+
+		if (empty($data[1]) && empty($data[2])) { $start = 'null'; $end = 'null'; } else { $start = $data[1]; $end = $data[2]; }	
+		$petugas = $data[3] ;
+		$pilihanlaporan = $data[4];
+
+		$report_data = $this->rate_model->list_filter_laporan_keseluruhan($id, $start, $end, $petugas, $pilihanlaporan);				
+		
+		echo json_encode($report_data);
+	}		
+
+	// end laporan kurang memuaskan
 
 	public function report_rated_category()
 	{
@@ -208,7 +277,15 @@ class Report extends CI_Controller {
 
 		echo $total_rating;		
 		// echo json_encode($total_rating);		
-	}		
+	}	
+
+	public function dashboard_get_total_agency() 
+	{
+		$total_agency = $this->config_model->stats_agency_active();
+
+		echo $total_agency;
+		// echo json_encode($total_rating);		
+	}	
 
 	// // cemerlang -table
 	// public function dashboard_get_total_cemerlang() 

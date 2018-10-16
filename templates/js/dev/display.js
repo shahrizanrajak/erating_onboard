@@ -32,19 +32,19 @@ $(document).ready(function()
           //setRating(smiley, qselect);
           console.log('No response for 3 sec.. timeout');
           $('#mdSelectReason').modal('hide');
-        }, 5000);       
+        }, 2000);       
 
       setRating(smiley, qselect);
     });  
 
   // $("#btnDashboard").click(function() {          
   // alert('lll');         
-  //     window.location.href = domain+"logmasuk.php/user-dashboard";
+  //     window.location.href = domain+"index.php/user-dashboard";
   // });  
 
   // $("#image-photo").dblclick(function() {        
   $("#image-photo").click(function() {          
-      window.location.href = domain+"logmasuk.php/user-dashboard";
+      window.location.href = domain+"index.php/user-dashboard";
   });      
 
   function setRating (smiley, qselect) {
@@ -54,13 +54,13 @@ $(document).ready(function()
 
       $.ajax({
           type: "POST",                
-          url: domain+"logmasuk.php/rateit",                                               
+          url: domain+"index.php/rateit",                                               
           data: {data: jsonData},              
             success: function(data) {          
               $('#mdSelectReason').modal('hide');     
               $('#mdShowThanks').modal('show');
               
-              setTimeout(function(){ $('#mdShowThanks').modal('hide') }, 5000);    
+              setTimeout(function(){ $('#mdShowThanks').modal('hide') }, 2000);    
             },
             error: function () {                     
                 alert('Unable to connect to the server..');

@@ -79,7 +79,7 @@ $route['user-update'] = 'administrator/user_update';
 $route['user-remove'] = 'administrator/user_remove';
 $route['user'] = 'administrator/user_view';
 $route['erating-list'] = 'administrator/erating_list';
-$route['erating-list2'] = 'administrator/erating_list2';
+$route['erating-list2'] = 'coordinator/erating_list';
 $route['erating-details/(:any)'] = 'administrator/erating_details/$1';
 $route['erating-save-agency'] = 'administrator/erating_save_agency';
 $route['erating-update-agency'] = 'administrator/erating_update_agency';
@@ -88,12 +88,21 @@ $route['erating-update-smiley'] = 'administrator/erating_update_smiley';
 $route['erating-update-question'] = 'administrator/erating_update_question';
 $route['image-set'] = 'administrator/save_image';
 $route['configuration'] = 'administrator/configuration';
+//test qr 
+$route['qr-test'] = 'coordinator/qr_preview';
 
 // Coordinator controller
 $route['coor-dashboard'] = 'coordinator/dashboard';
 $route['coor-user'] = 'coordinator/user_view';
 $route['coor-erating-list'] = 'coordinator/erating_list';
+$route['coor-configuration'] = 'coordinator/configuration';
 // $route['user-details/(:any)'] = 'coordinator/user_details/$1';
+
+// Pengguna Controller
+$route['peng-erating-list'] = 'pengguna/erating_list';
+$route['peng-dashboard'] = 'pengguna/dashboard';
+$route['peng-configuration'] = 'pengguna/configuration';
+$route['pengguna-user'] = 'pengguna/user_view';
 
 // User controller 
 $route['administrator'] = 'user/admin';
@@ -107,6 +116,7 @@ $route['rateit'] = 'counter/rate_it';
 // Report
 $route['report'] = 'report/report';
 $route['user-report'] = 'report/user_report';
+$route['coor-report'] = 'report/coor_report';
 
 // Admin API 
 
@@ -120,11 +130,14 @@ $route['api/report-data'] = 'report/report_data';
 $route['api/report-all/(:any)'] = 'report/report_all/$1';
 $route['api/report-by-rated/(:any)'] = 'report/report_rated/$1';
 $route['api/report-feedback/(:any)'] = 'report/report_feedback/$1';
+$route['api/report-laporan-purata/(:any)'] = 'report/report_laporan_purata/$1';
+$route['api/report-laporan-keseluruhan/(:any)'] = 'report/report_laporan_keseluruhan/$1';
 $route['api/report-by-rated-category'] = 'report/report_rated_category';
 $route['api/report-rated-monthly'] = 'report/report_rated_monthly';
 $route['api/report-rated-monthly-agency'] = 'report/report_rated_monthly_agency';
 $route['api/user-log/(:any)'] = 'report/report_user_log/$1';
 $route['api/report-rated-monthly-agency-pivot/(:any)'] = 'report/report_rated_monthly_agency_pivot/$1';
+$route['api/dashboard_total_agency'] = 'report/dashboard_get_total_agency';
 $route['api/dashboard_total_rating'] = 'report/dashboard_get_total_rating';
 $route['api/dashboard_total_active'] = 'report/dashboard_get_total_active';
 $route['api/dashboard_total_comment'] = 'report/dashboard_get_total_comment';
@@ -144,5 +157,22 @@ $route['asnaf-status-mobile/(:any)'] = 'api/asnaf_status/$1';
 $route['users-by-parliment/(:any)'] = 'api/users_by_parliment/$1';
 $route['department-by-ministry/(:any)'] = 'api/department_by_ministry/$1';
 $route['branch-by-department/(:any)'] = 'api/branch_by_department/$1';
+$route['petugas-by-selection/(:any)'] = 'api/petugas_by_selection/$1';
+
+//QR Code
+$route['qrcode/(:any)'] = 'Qr_code_generate/print_qr/$1';
+$route['qrcodepdf/(:any)'] = 'Qr_code_generate/print_pdf/$1';
+
+
+//Mobile
+$route['mobile'] = 'mobile';
+$route['mobile/(:any)'] = 'mobile/mobile/$1';
+$route['mobile/qruser/(:any)'] = 'mobile/get_qruser/$1';
+$route['mobilev2'] = 'mobile/mobilev2';
+$route['mobile/find_agency/(:any)'] = 'mobile/find_agency/$1';
+$route['mobile/list_counter/(:any)'] = 'mobile/list_counter/$1';
+$route['mobile/rate/(:any)'] = 'mobile/rate/$1';
+$route['mobile/get_rating/(:any)'] = 'mobile/get_rating/$1';
+$route['mobile/rateit/(:any)/(:any)/(:any)/(:any)'] = 'mobile/rate_it_mobile/$1/$2/$3/$4';
 
 //

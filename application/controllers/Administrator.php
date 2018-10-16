@@ -119,7 +119,7 @@ class Administrator extends CI_Controller {
 
 
 		$this->load->view('admin/header');
-		$this->load->view('admin/erating2', $data);		
+		$this->load->view('admin/erating', $data);		
 		$this->load->view('admin/footer');
 	}	
 

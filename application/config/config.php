@@ -24,7 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 // $config['base_url'] = '';
-$config['base_url'] = 'http://test-erating-dev.apps.osdec.gov.my';
+$config['base_url'] = 'http://localhost/erating';
 
 /*
 |--------------------------------------------------------------------------
@@ -36,7 +36,7 @@ $config['base_url'] = 'http://test-erating-dev.apps.osdec.gov.my';
 | variable so that it is blank.
 |
 */
-$config['index_page'] = 'logmasuk.php';
+$config['index_page'] ='index.php';
 
 /*
 |--------------------------------------------------------------------------

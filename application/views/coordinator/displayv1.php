@@ -62,7 +62,7 @@
            <tr>
             <td align="center">
               <font size="4.5" color="#000000"><?php echo date('l'); ?>, <span id="servertime"></span></font> <br />              
-              <a href="<?php echo base_url(); ?>logmasuk.php/logout">
+              <a href="<?php echo base_url(); ?>index.php/logout">
                 <font size="6" color="#000000">
                   <?php echo $this->session->userdata('logged_user'); ?>
                 </font>
@@ -111,8 +111,10 @@
           </tr>          
           <tr>
             <td align="center">
-<!--               <h6><?php echo $agency_data['department']; ?></h6>
-              <button id="btnDashboard" type="button" class="btn btn-primary">Dashboard</button> -->
+              <h6><?php echo $agency_data['branch']; ?></h6>
+              <h6><?php echo $agency_data['department']; ?></h6>
+              <h6><?php echo $agency_data['ministry']; ?></h6>
+              <!-- <button id="btnDashboard" type="button" class="btn btn-primary">Dashboard</button> -->
             </td>
           </tr>
         </table> 

@@ -740,7 +740,7 @@ Licensed under the BSD-2-Clause License.
     Line.prototype.defaults = {
       lineWidth: 3,
       pointSize: 4,
-      lineColors: ['#0b62a4', '#7A92A3', '#4da74d', '#afd8f8', '#edc240', '#cb4b4b', '#9440ed'],
+      lineColors: ['#0b62a4', '#00a65a', '#d2d6de', '#f39c12', '#dd4b39', '#cb4b4b', '#9440ed'],
       pointStrokeWidths: [1],
       pointStrokeColors: ['#ffffff'],
       pointFillColors: [],

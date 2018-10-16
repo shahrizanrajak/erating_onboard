@@ -8,7 +8,7 @@
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <span class="logo-mini">+</span>
           <!-- logo for regular state and mobile devices -->
-          <span class="logo-lg"><b>e</b>RATING</span>
+          <span class="logo-lg"><b>e</b>RATING-Coo</span>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
@@ -43,7 +43,7 @@
                       <a href="#" class="btn btn-default btn-flat">Profile</a>
                     </div>
                     <div class="pull-right">
-                      <a href="<?php echo base_url(); ?>logmasuk.php/logout" class="btn btn-default btn-flat">Sign out</a>
+                      <a href="<?php echo base_url(); ?>index.php/logout" class="btn btn-default btn-flat">Sign out</a>
                     </div>
                   </li>
                 </ul>
@@ -80,7 +80,7 @@
           <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
             <li>
-              <a href="<?php echo base_url(); ?>logmasuk.php/coor-dashboard">
+              <a href="<?php echo base_url(); ?>index.php/coor-dashboard">
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
               </a>
             </li>
@@ -91,18 +91,18 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li class="active"><a href="<?php echo base_url(); ?>logmasuk.php/coor-erating-list"><i class="fa fa-circle-o"></i> Senarai</a></li>
+                <li class="active"><a href="<?php echo base_url(); ?>index.php/erating-list-coo"><i class="fa fa-circle-o"></i> Senarai</a></li>
                 <li><a href="#" id="erating-new"><i class="fa fa-circle-o"></i> Daftar</a></li>
               </ul>
             </li>                        
             <li>
-              <a href="<?php echo base_url(); ?>logmasuk.php/coor-report">
+              <a href="<?php echo base_url(); ?>index.php/coor-report">
                 <i class="fa fa-bar-chart"></i>
                 <span>Laporan</span>                
               </a>
             </li> 
             <li>
-              <a href="<?php echo base_url(); ?>logmasuk.php/coor-user">
+              <a href="<?php echo base_url(); ?>index.php/coor-user">
                 <i class="fa fa-user"></i> <span>Maklumat Diri</span>
               </a>
             </li>                        
@@ -120,7 +120,7 @@
             <small>Mengikut agensi berdaftar</small>
           </h1>          
           <ol class="breadcrumb">
-            <li><a href="<?php echo base_url(); ?>logmasuk.php/dashboard"><i class="fa fa-dashboard"></i> Utama</a></li>
+            <li><a href="<?php echo base_url(); ?>index.php/dashboard"><i class="fa fa-dashboard"></i> Utama</a></li>
             <li class="active">Tetapan</li>
           </ol>
         </section> 

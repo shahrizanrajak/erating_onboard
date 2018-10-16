@@ -31,7 +31,7 @@
         <script src="<?php echo base_url(); ?>templates/adminlte/plugins/datatables/buttons.print.min.js" type="text/javascript"></script>  
 
         <!-- Logo -->
-        <a href="index2.html" class="logo">
+        <a href="<?php echo base_url(); ?>index.php/dashboard" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <span class="logo-mini">+</span>
           <!-- logo for regular state and mobile devices -->
@@ -66,10 +66,10 @@
                   <!-- Menu Footer-->
                   <li class="user-footer">
                     <div class="pull-left">
-                      <a href="#" class="btn btn-default btn-flat">Profile</a>
+                      <a href="<?php echo base_url(); ?>index.php/user" class="btn btn-default btn-flat">Profile</a>
                     </div>
                     <div class="pull-right">
-                      <a href="<?php echo base_url(); ?>logmasuk.php/logout" class="btn btn-default btn-flat">Sign out</a>
+                      <a href="<?php echo base_url(); ?>index.php/logout" class="btn btn-default btn-flat">Sign out</a>
                     </div>
                   </li>
                 </ul>
@@ -94,25 +94,25 @@
             </div>
           </div>
           <!-- search form -->
-          <form action="#" method="get" class="sidebar-form">
+        <!--   <form action="#" method="get" class="sidebar-form">
             <div class="input-group">
               <input type="text" name="q" class="form-control" placeholder="Search..." />
               <span class="input-group-btn">
                 <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
               </span>
             </div>
-          </form>
+          </form> -->
           <!-- /.search form -->
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
             <li>
-              <a href="<?php echo base_url(); ?>logmasuk.php/dashboard">
+              <a href="<?php echo base_url(); ?>index.php/dashboard">
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
               </a>
             </li>
             <li class="treeview">
-              <a href="<?php echo base_url(); ?>logmasuk.php/erating-list">
+              <a href="<?php echo base_url(); ?>index.php/erating-list">
                 <i class="fa fa-th"></i>
                 <span>Tetapan E-Rating</span>                
               </a>
@@ -127,13 +127,13 @@
               </a>
             </li>                      
             <li>
-              <a href="<?php echo base_url(); ?>logmasuk.php/report">
+              <a href="<?php echo base_url(); ?>index.php/report">
                 <i class="fa fa-bar-chart"></i>
                 <span>Laporan</span>                
               </a>
             </li> 
             <li>
-              <a href="<?php echo base_url(); ?>logmasuk.php/user">
+              <a href="<?php echo base_url(); ?>index.php/user">
                 <i class="fa fa-user"></i> <span>Maklumat Diri</span>
               </a>
             </li>                        
@@ -146,12 +146,15 @@
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
+        <h1>
+        <center><p><?php echo $this->session->userdata('email'); ?></p></center>
+        </h1>
           <h1>
             Tetapan Sistem
             <small></small>
           </h1>          
           <ol class="breadcrumb">
-            <li><a href="<?php echo base_url(); ?>logmasuk.php/dashboard"><i class="fa fa-dashboard"></i> Utama</a></li>
+            <li><a href="<?php echo base_url(); ?>index.php/dashboard"><i class="fa fa-dashboard"></i> Utama</a></li>
             <li class="active">Tetapan Sistem</li>
           </ol>
         </section> 
@@ -390,7 +393,7 @@
           <input type="hidden" id="base_url" name="base_url" value="<?php echo mydomain; ?>">          
           <b>Version</b> 1.0
         </div>
-        <strong>Copyright &copy; 2016 <a href="<?php echo mydomain; ?>">E-Rating Development Team</a>.</strong> All rights reserved.
+        <strong>Copyright &copy; 2016 <a href="<?php echo base_url(); ?>index.php/dashboard">E-Rating Development Team</a>.</strong> All rights reserved.
       </footer>
       <!-- Control Sidebar -->
       <aside class="control-sidebar control-sidebar-dark"></aside><!-- /.control-sidebar -->

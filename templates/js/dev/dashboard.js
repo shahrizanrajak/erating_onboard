@@ -5,21 +5,21 @@ $(document).ready(function()
 
     setInterval( function () {
 
-          //  $.ajax({
-          //     type: "GET",
-          //     datatype: "jsonp",                            
-          //     url: domain+"logmasuk.php/api/dashboard_total_active",                                                                            
-          //     success: function(data) {                       
-          //       $('#txtTotalAgencyActive').text(data);
-          //      // console.log('getData: '+ data);
-          //     }
-          // });      
+           $.ajax({
+              type: "GET",
+              datatype: "jsonp",                            
+              url: domain+"index.php/api/dashboard_total_agency",                                                                            
+              success: function(data) {                       
+                $('#txtTotalAgencyActive').text(data);
+               // console.log('getData: '+ data);
+              }
+          });      
 
 
           $.ajax({
               type: "GET",
               datatype: "jsonp",                            
-              url: domain+"logmasuk.php/api/dashboard_total_active",                                                                            
+              url: domain+"index.php/api/dashboard_total_active",                                                                            
               success: function(data) {                       
                 $('#txtTotalActive').text(data);
                // console.log('getData: '+ data);
@@ -30,7 +30,7 @@ $(document).ready(function()
           $.ajax({
               type: "GET",
               datatype: "jsonp",                            
-              url: domain+"logmasuk.php/api/dashboard_total_rating",                                                                            
+              url: domain+"index.php/api/dashboard_total_rating",                                                                            
               success: function(data) {                       
                 $('#txtTotalRating').text(data);
                // console.log('getData: '+ data);
@@ -40,7 +40,7 @@ $(document).ready(function()
           $.ajax({
               type: "GET",
               datatype: "jsonp",                            
-              url: domain+"logmasuk.php/api/dashboard_total_comment",                                                                            
+              url: domain+"index.php/api/dashboard_total_comment",                                                                            
               success: function(data) {                       
                 $('#txtTotalComment').text(data);
               }
@@ -51,7 +51,7 @@ $(document).ready(function()
         // $.ajax({
         //       type: "GET",
         //       datatype: "jsonp",                            
-        //       url: domain+"logmasuk.php/api/report-by-rated-category",                                                                            
+        //       url: domain+"index.php/api/report-by-rated-category",                                                                            
         //       success: function(data) {                       
         //         $('#data_rate_1').text(data);
         //       }
@@ -75,7 +75,7 @@ $(document).ready(function()
 
     /* Pie Chart */
     $.ajax({
-       url: domain+'logmasuk.php/api/report-by-rated-category',
+       url: domain+'index.php/api/report-by-rated-category',
        success: function (response) {//response is value returned from php
             // alert(response); //showing response is working
           var datachart = JSON.parse(response);
@@ -86,8 +86,8 @@ $(document).ready(function()
             [
               {
                 value: item.rate_5,
-                color: "#00c0ef", //aqua
-                highlight: "#00c0ef",
+                color: "#0b62a4", //blue
+                highlight: "#0b62a4",
                 label: "Cemerlang"
               },                        
               {
@@ -110,8 +110,8 @@ $(document).ready(function()
               },                   
               {
                 value: item.rate_1,
-                color: "#f56954", //red
-                highlight: "#f56954",
+                color: "#dd4b39", //red
+                highlight: "#dd4b39",
                 label: "Tidak Memuaskan"
               }
             ];                
@@ -163,7 +163,7 @@ $(document).ready(function()
 
     /* Generating Graph*/
     $.ajax({
-       url: domain+'logmasuk.php/api/report-rated-monthly',
+       url: domain+'index.php/api/report-rated-monthly',
        success: function (response) 
        {            
           var datachart = JSON.parse(response);
@@ -197,7 +197,7 @@ $(document).ready(function()
               xkey: 'month',
               ykeys: ['rate_5', 'rate_4', 'rate_3', 'rate_2', 'rate_1'],
               labels: ['Cemerlang', 'Memuaskan', 'Sederhana', 'Kurang', 'Tidak'],
-              barColors: ["#00FFFF", "#00a65a", "#d2d6de", "#f39c12", "#dd4b39"],
+              barColors: ["#0b62a4", "#00a65a", "#d2d6de", "#f39c12", "#dd4b39"],
               xLabelFormat: function() {
                 return month_format_line.shift();    // take out array item one by one from front, http://www.w3schools.com/jsref/jsref_shift.asp                  
               },              
@@ -209,7 +209,7 @@ $(document).ready(function()
 
         /* test buat bar graf*/
     $.ajax({
-       url: domain+'logmasuk.php/api/report-by-rated-category',
+       url: domain+'index.php/api/report-by-rated-category',
        success: function (response) 
        {            
           var datachartbar = JSON.parse(response);

@@ -16,19 +16,16 @@ class Rate_model extends CI_Model {
         $this->role = $this->session->userdata('role');  
         $this->agency = substr($this->session->userdata('agency'), 0, 6);  // get main agency ID
         
-     // load tahun database yang kita nak paparkan
-        // $this->today = '2016-01-18';
-        // $this->year = "2016";
-        // $this->today = "2016-04-10";
-
-        $this->today = date("Y-m-d");
-        $this->year = "2017";
-       // $this->year = date("Y");  
+        $this->year = "2018";        
+        // $this->year = date("Y");  
+        
+        //$this->today = '2016-01-18';
+        $this->today = date("Y-m-d");        
         
         // echo $this->today;            
 	}
 
-    public function list_filter($id, $start, $end)
+    public function list_filter($id, $start, $end, $petugas)
     {
         $this->db->cache_off();
         $stmt = "SELECT rateit.*,
@@ -49,17 +46,20 @@ class Rate_model extends CI_Model {
         // Filter by Current Year
         // AND/OR Filter by Agency Id
         if ($id == "all") { 
-            // $stmt .= " WHERE Year(date_update) = '". $this->year ."'";
+            $stmt .= " WHERE Year(date_update) = '". $this->year ."'";
         } else {
             // $stmt .= " WHERE LEFT(agency_id, 9) = $id AND Year(date_update) = YEAR(CURDATE())"; 
             $stmt .= " WHERE agency_id = $id AND Year(date_update) = '". $this->year ."'"; 
-            // $stmt .= " WHERE agency_id = $id "; 
         }
 
         // Filter by User Roles
         if ($this->role == 'Pentadbir') {
             $stmt .= " AND agency_id LIKE '". $this->agency ."%'";
         }
+
+         // Filter by pengguna]
+        if ($petugas == 'all') $stmt .= " AND agency_id = '$id'";
+        else  $stmt .= " AND pengguna.id_pengguna = '$petugas'";
 
         // Filter by Date Range
         if (($start != 'null') && ($end != 'null')) {
@@ -234,31 +234,148 @@ class Rate_model extends CI_Model {
         return $query->result_array();
     } 
 
-    public function list_by_agency_with_agency_name()
+
+    // laporan Purata 
+
+    public function list_filter_laporan_purata($id, $start, $end,$petugas, $pilihanlaporan)
     {
+       // if ($pilihanlaporan == '3' ) $picked = '2';
+       //  elseif ($pilihanlaporan == '4') $picked = '1';
+
         $this->db->cache_off();
-        $query = $this->db->query("SELECT agency_id,
-            kementerian.kementerian AS ministry,
-            jabatan.jabatan AS department,
-            cawangan.cawangan AS branch,
-            konfigurasi.Bahagian AS section,
-            SUM(picked = 1) as '1',
-            SUM(picked = 2) as '2',
-            SUM(picked = 3) as '3',
-            SUM(picked = 4) as '4',
-            SUM(picked = 5) as '5',
-            COUNT(picked) as 'total'
-            FROM rateit
-            LEFT JOIN kementerian ON kementerian.Kod_Kem = LEFT(agency_id, 3) 
-            LEFT JOIN jabatan ON jabatan.Kod_Jab= LEFT(agency_id, 6) 
-            LEFT JOIN cawangan ON cawangan.Kod_Caw = LEFT(agency_id, 9)
-            LEFT JOIN konfigurasi ON konfigurasi.Kod_Bah = agency_id
-            WHERE Year(date_update) = '". $this->year ."'
-            GROUP BY agency_id
-            ");     
+        $stmt = "SELECT rate_id,
+            pengguna.nama AS petugas,
+            soalan.Soalan_Ms AS perkara,
+            smiley.Caption_Ms As tahap,  
+            rateit.date_update AS tarikh,
+            rateit.date_update AS masa
+            
+        FROM rateit
+        LEFT JOIN pengguna ON pengguna.id_pengguna = rateit.user_id
+        LEFT JOIN soalan ON soalan.Id_Soalan = rateit.reason
+        LEFT JOIN smiley ON smiley.Id_Smiley = rateit.picked
+
+        WHERE rateit.picked = '$picked' ";
+            
+        // Filter by Current Year
+        // AND/OR Filter by Agency Id
+        // if ($id == "all") { 
+        //     $stmt .= " AND Year(date_update) = '". $this->year ."'";
+        // } else {
+        //     // $stmt .= " WHERE LEFT(agency_id, 9) = $id AND Year(date_update) = YEAR(CURDATE())"; 
+        //     $stmt .= " AND agency_id = '$id' AND Year(date_update) = '". $this->year ."'"; 
+        // }
+
+        // Filter by User Roles
+        if ($this->role == 'Pentadbir') {
+            $stmt .= " AND agency_id LIKE '". $this->agency ."%'";
+        }
+
+        // Filter by Date Range
+        if (($start != 'null') && ($end != 'null')) {
+            $stmt .= " AND date(date_update) BETWEEN date('$start') AND date('$end')";
+        } 
+
+        // Filter by pengguna]
+        if ($petugas == 'all') $stmt .= " AND agency_id = '$id'";
+        else  $stmt .= " AND pengguna.id_pengguna = '$petugas'";
+ 
+        //$stmt .= " GROUP BY rate_1";     
+        
+        $query = $this->db->query($stmt);
 
         return $query->result_array();
-    }    
+    } 
+
+    // end laporan Purata 
+
+    // laporan kurang memuaskan dan tidak memuaskan
+
+    public function list_filter_laporan_keseluruhan($id, $start, $end, $petugas, $pilihanlaporan)
+    {
+        if ($pilihanlaporan == '3' ) $picked = '2';
+        elseif ($pilihanlaporan == '4') $picked = '1';
+
+      
+
+        $this->db->cache_off();
+        $stmt = "SELECT rate_id,
+            pengguna.nama AS petugas,
+            soalan.Soalan_Ms AS perkara,
+            smiley.Caption_Ms As tahap,  
+            rateit.date_update AS tarikh,
+            rateit.date_update AS masa
+            
+        FROM rateit
+        LEFT JOIN pengguna ON pengguna.id_pengguna = rateit.user_id
+        LEFT JOIN soalan ON soalan.Id_Soalan = rateit.reason
+        LEFT JOIN smiley ON smiley.Id_Smiley = rateit.picked ";
+
+        if (($pilihanlaporan =='3' ) || ($pilihanlaporan == '4'))
+            $stmt .= "WHERE rateit.picked = '$picked' ";
+        else $stmt .= "WHERE 1=1 ";
+            
+        // Filter by Current Year
+        // AND/OR Filter by Agency Id
+        // if ($id == "all") { 
+        //     $stmt .= " AND Year(date_update) = '". $this->year ."'";
+        // } else {
+        //     // $stmt .= " WHERE LEFT(agency_id, 9) = $id AND Year(date_update) = YEAR(CURDATE())"; 
+        //     $stmt .= " AND agency_id = '$id' AND Year(date_update) = '". $this->year ."'"; 
+        // }
+
+        // Filter by User Roles
+        if ($this->role == 'Pentadbir') {
+            $stmt .= " AND agency_id LIKE '". $this->agency ."%'";
+        }
+
+        // Filter by Date Range
+        if (($start != 'null') && ($end != 'null')) {
+            $stmt .= " AND date(date_update) BETWEEN date('$start') AND date('$end')";
+        } 
+
+        // Filter by pengguna]
+        if ($petugas == 'all') $stmt .= " AND agency_id = '$id'";
+        else  $stmt .= " AND pengguna.id_pengguna = '$petugas'";
+ 
+        //$stmt .= " GROUP BY rate_1";     
+        $stmt .= " ORDER BY petugas ASC";     
+        
+        $query = $this->db->query($stmt);
+
+        return $query->result_array();
+    } 
+
+    // end laporan kurang memuaskan dan tidak memuaskan
+
+    // public function list_by_agency_with_agency_name()
+    // {
+    //     $this->db->cache_off();
+    //     $query = $this->db->query("SELECT agency_id,
+    //         kementerian.kementerian AS ministry,
+    //         jabatan.jabatan AS department,
+    //         cawangan.cawangan AS branch,
+    //         konfigurasi.Bahagian AS section,
+    //         SUM(picked = 1) as '1',
+    //         SUM(picked = 2) as '2',
+    //         SUM(picked = 3) as '3',
+    //         SUM(picked = 4) as '4',
+    //         SUM(picked = 5) as '5',
+    //         COUNT(picked) as 'total'
+    //         FROM rateit
+    //         LEFT JOIN kementerian ON kementerian.Kod_Kem = LEFT(agency_id, 3) 
+    //         LEFT JOIN jabatan ON jabatan.Kod_Jab= LEFT(agency_id, 6) 
+    //         LEFT JOIN cawangan ON cawangan.Kod_Caw = LEFT(agency_id, 9)
+    //         LEFT JOIN konfigurasi ON konfigurasi.Kod_Bah = agency_id
+    //         WHERE Year(date_update) = '". $this->year ."'
+    //         GROUP BY agency_id
+    //         ");     
+
+    //     return $query->result_array();
+    // }    
+
+
+
 
     public function list_total_rating_monthly()
     {
@@ -266,20 +383,20 @@ class Rate_model extends CI_Model {
         $cache = ((date('d') == '25')? $this->db->cache_on() :  $this->db->cache_delete('api', 'report-by-rated-category'));   
 
         $this->db->cache_off();
-        $query = $this->db->query("SELECT Month(date_update) AS month,
-            SUM(picked = 1) as 'rate_1',
-            SUM(picked = 2) as 'rate_2',
-            SUM(picked = 3) as 'rate_3',
-            SUM(picked = 4) as 'rate_4',
-            SUM(picked = 5) as 'rate_5',            
-            COUNT(picked) as 'total'
-            FROM rateit
-            LEFT JOIN kementerian ON kementerian.Kod_Kem = LEFT(agency_id, 3) 
-            LEFT JOIN jabatan ON jabatan.Kod_Jab= LEFT(agency_id, 6) 
-            LEFT JOIN cawangan ON cawangan.Kod_Caw = LEFT(agency_id, 9)
-            LEFT JOIN konfigurasi ON konfigurasi.Kod_Bah = agency_id
-            WHERE Year(date_update) = '". $this->year ."'            
-            ");
+        // $query = $this->db->query("SELECT Month(date_update) AS month,
+        //     SUM(picked = 1) as 'rate_1',
+        //     SUM(picked = 2) as 'rate_2',
+        //     SUM(picked = 3) as 'rate_3',
+        //     SUM(picked = 4) as 'rate_4',
+        //     SUM(picked = 5) as 'rate_5',            
+        //     COUNT(picked) as 'total'
+        //     FROM rateit
+        //     LEFT JOIN kementerian ON kementerian.Kod_Kem = LEFT(agency_id, 3) 
+        //     LEFT JOIN jabatan ON jabatan.Kod_Jab= LEFT(agency_id, 6) 
+        //     LEFT JOIN cawangan ON cawangan.Kod_Caw = LEFT(agency_id, 9)
+        //     LEFT JOIN konfigurasi ON konfigurasi.Kod_Bah = agency_id
+        //     WHERE Year(date_update) = '". $this->year ."'            
+        //     ");
 
         $stmt = "SELECT Month(date_update) AS month,
             SUM(picked = 1) as 'rate_1',
@@ -360,7 +477,7 @@ class Rate_model extends CI_Model {
         return $query->result_array(); 
     }
 
-    /*public function list_by_agency_with_agency_name_top_three()
+    public function list_by_agency_with_agency_name_top_three()
     {
         $this->db->cache_off();
         $stmt = "SELECT agency_id,
@@ -387,7 +504,7 @@ class Rate_model extends CI_Model {
         $query = $this->db->query($stmt);
 
         return $query->result_array();
-    }*/  
+    }  
 
     public function list_by_date_range($from, $to)
     {
@@ -445,6 +562,35 @@ class Rate_model extends CI_Model {
         return $result;
     }      
 
+    public function save_rate_mobile($agency, $user, $picked)
+    {
+        $items = null; $values = null;     
+        $sessionid = md5(uniqid(rand()));   
+       
+        $items .= "agency_id,";
+        $values .= "'". $agency ."',";
+
+        $items .= "user_id,";
+        $values .= "'". $user ."',";   
+
+        $items .= "picked,";
+        $values .= "'". $picked ."',";             
+
+        // Generete unique session id
+        $items .= "session_id,";
+        $values .= "'". $sessionid ."',";
+
+        // Insert Date Updated
+        $items .= "date_update,";
+        $values .= "'". date("Y-m-d H:i:s", time()) ."',";
+
+        $qitems = substr($items, 0, -1);
+        $qvalues = substr($values, 0, -1);                
+
+        $result = $this->db->query("INSERT INTO rateit (".$qitems.") VALUES (".$qvalues.")");              
+            
+        return $result;
+    } 
     public function update_agency($data)
     {
         // Update Record
@@ -510,7 +656,7 @@ class Rate_model extends CI_Model {
 
         $this->db->select('COUNT(rate_id)');
         $this->db->from('rateit');
-        $this->db->where('Date(date_update)', $this->today);
+        $this->db->where('Year(date_update)', $this->year);
 
         // Filter by User Roles
         if ($this->role == 'Pentadbir') {
@@ -534,8 +680,7 @@ class Rate_model extends CI_Model {
         $this->db->select('COUNT(rate_id)');
         $this->db->from('rateit');
         $this->db->where('picked <=', 2);
-        // $this->db->where('Year(date_update)', $this->year);
-        $this->db->where('Date(date_update)', $this->today);
+        $this->db->where('Year(date_update)', $this->year);
 
         // Filter by User Roles
         if ($this->role == 'Pentadbir') {

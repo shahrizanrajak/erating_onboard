@@ -3,7 +3,7 @@
         var domain = $('#domain').val();
         var base_url = $('#base_url').val();
         var json_data = $('#json_data').val();            
-        var jsonData = domain+'logmasuk.php/'+json_data;
+        var jsonData = domain+'index.php/'+json_data;
 
         // initiate table
         getRatings('all');
@@ -57,7 +57,22 @@
             //alert("A new date range was chosen: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
             $('#dateRange_start_5').val(start.format('YYYY-MM-DD'));
             $('#dateRange_end_5').val(end.format('YYYY-MM-DD'));
-        });         
+        }); 
+
+
+          $('#dateRange_6').daterangepicker(
+        {
+            locale: {
+              format: 'YYYY-MM-DD'
+            }
+        }, 
+        function(start, end, label) {
+            //alert("A new date range was chosen: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+            $('#dateRange_start_6').val(start.format('YYYY-MM-DD'));
+            $('#dateRange_end_6').val(end.format('YYYY-MM-DD'));
+        });       
+
+                
 
         // Generate table
         // Reference: https://www.datatables.net/examples/api/select_single_row.html        
@@ -238,6 +253,100 @@
             ],            
         }); 
 
+        // Laporan keseluruhan
+        
+        var tblListLaporanKeseluruhan = $('#tblListLaporanKeseluruhan').DataTable({        
+          "paging": true,
+          "lengthChange": true,
+          "searching": true,
+          "ordering": true,
+          "info": true,          
+          "processing": true,
+          "sAjaxDataProp":"",
+          "serverSide": false,
+          "autoWidth": true,
+          "columnDefs": [
+                // { "type": "date_update", "targets": -1 },
+                { "targets": [0], "visible": false, "searchable": false }
+            ],
+          "dom": 'Blrtip',                 
+            buttons: [
+                {
+                    extend:    'copyHtml5',
+                    text:      '<i class="fa fa-files-o"></i>',
+                    titleAttr: 'Copy'
+                },
+                {
+                    extend:    'excelHtml5',
+                    text:      '<i class="fa fa-file-excel-o"></i>',
+                    titleAttr: 'Excel'
+                },
+                {
+                    extend:    'csvHtml5',
+                    text:      '<i class="fa fa-file-text-o"></i>',
+                    titleAttr: 'CSV'
+                },
+                {
+                    extend:    'pdfHtml5',
+                    text:      '<i class="fa fa-file-pdf-o"></i>',
+                    titleAttr: 'PDF'
+                },
+                {
+                    extend:    'print',
+                    text:      '<i class="fa fa-print"></i>',
+                    titleAttr: 'Print'
+                }
+            ],            
+        }); 
+        // end laporan kurang memuaskan
+
+        // Laporan Purata
+
+        var tblListPurata = $('#tblListPurata').DataTable({        
+          "paging": true,
+          "lengthChange": true,
+          "searching": true,
+          "ordering": true,
+          "info": true,          
+          "processing": true,
+          "sAjaxDataProp":"",
+          "serverSide": false,
+          "autoWidth": true,
+          "columnDefs": [
+                // { "type": "date_update", "targets": -1 },
+                { "targets": [0], "visible": false, "searchable": false }
+            ],
+          "dom": 'Blrtip',                 
+            buttons: [
+                {
+                    extend:    'copyHtml5',
+                    text:      '<i class="fa fa-files-o"></i>',
+                    titleAttr: 'Copy'
+                },
+                {
+                    extend:    'excelHtml5',
+                    text:      '<i class="fa fa-file-excel-o"></i>',
+                    titleAttr: 'Excel'
+                },
+                {
+                    extend:    'csvHtml5',
+                    text:      '<i class="fa fa-file-text-o"></i>',
+                    titleAttr: 'CSV'
+                },
+                {
+                    extend:    'pdfHtml5',
+                    text:      '<i class="fa fa-file-pdf-o"></i>',
+                    titleAttr: 'PDF'
+                },
+                {
+                    extend:    'print',
+                    text:      '<i class="fa fa-print"></i>',
+                    titleAttr: 'Print'
+                }
+            ],            
+        }); 
+        // end laporan kurang memuaskan
+
         var tblListUserLog = $('#tblListUserLog').DataTable({        
           "paging": true,
           "lengthChange": true,
@@ -313,17 +422,20 @@
         // Initialize combobox selection in the Tab Laporan Terpeinci
         $('#dropdownMinistryAssign_1').change(function() {                
           var UserMinistryValue = $(this).val();
-          dropdownMinistryChange(UserMinistryValue, 1);           
+          dropdownMinistryChange(UserMinistryValue, 1);
+          dropdownPetugasChange(UserMinistryValue, 1);           
         });  
 
         $('#dropdownDepartmentAssign_1').change(function() {              
           var UserDepartmentValue = $(this).val();
-          dropdownDepartmentChange(UserDepartmentValue, 1);           
+          dropdownDepartmentChange(UserDepartmentValue, 1); 
+          dropdownPetugasChange(UserDepartmentValue, 1);          
         });  
 
         $('#dropdownBranchAssign_1').change(function() {                  
           var UserBranchValue = $(this).val();
-          console.log(UserBranchValue);          
+          console.log(UserBranchValue);  
+          dropdownPetugasChange(UserBranchValue, 1);        
         });  
 
         // Initialize combobox selection in the Tab Mengikut Agensi
@@ -388,7 +500,29 @@
         $('#dropdownBranchAssign_5').change(function() {                  
           var UserBranchValue = $(this).val();
           console.log(UserBranchValue);          
-        });               
+        });     
+
+        // Initialize combobox selection in the Tab Laporan Keseluruhan
+        $('#dropdownMinistryAssign_6').change(function() {              
+          var UserMinistryValue = $(this).val();
+          dropdownMinistryChange(UserMinistryValue, 6);
+          dropdownPetugasChange(UserMinistryValue, 6);
+
+        });  
+
+        $('#dropdownDepartmentAssign_6').change(function() {              
+          var UserDepartmentValue = $(this).val();
+          dropdownDepartmentChange(UserDepartmentValue, 6);           
+          dropdownPetugasChange(UserDepartmentValue, 6);           
+        });  
+
+        $('#dropdownBranchAssign_6').change(function() {                  
+          var UserBranchValue = $(this).val();
+          console.log(UserBranchValue); 
+           dropdownPetugasChange(UserBranchValue, 6);         
+        });     
+
+         
 
         /* Operations */
         function dropdownMinistryChange (UserMinistryValue, id) {
@@ -398,7 +532,7 @@
           $.ajax({
               type: "GET",
               datatype: "jsonp",                            
-              url: domain+"logmasuk.php/department-by-ministry/"+UserMinistryValue,
+              url: domain+"index.php/department-by-ministry/"+UserMinistryValue,
               //data: {name},                                                                
               success: function(data) {
                   $('#dropdownDepartmentAssign_'+ id +'').empty();
@@ -428,7 +562,7 @@
           $.ajax({
               type: "GET",
               datatype: "jsonp",                            
-              url: domain+"logmasuk.php/branch-by-department/"+UserDepartmentValue,
+              url: domain+"index.php/branch-by-department/"+UserDepartmentValue,
               //data: {name},                                                                
               success: function(data) {
                   $('#dropdownBranchAssign_'+ id +'').empty();
@@ -446,7 +580,37 @@
                   alert('Unable to process this request...');
               }
           });            
-        };             
+        };     
+
+
+        // petugas
+
+         function dropdownPetugasChange (UserPetugasValue, id) {        
+          console.log('UserPetugasValue: '+UserPetugasValue);
+          console.log('id: '+id);
+
+          // List User(s) if Department was selected
+          $.ajax({
+              type: "GET",
+              datatype: "jsonp",                            
+              url: domain+"index.php/petugas-by-selection/"+UserPetugasValue,
+              //data: {name},                                                                
+              success: function(data) {
+                  $('#dropdownPetugasAssign_'+ id +'').empty();
+                  // $('#dropdownBranchAssign_'+ id +'').append('<option value="000000000"> Pilih Cawangan </option>');
+                  $('#dropdownPetugasAssign_'+ id +'').append("<option value='all'>SEMUA</option>");
+
+                  for (var i=0;i<data.length;i++) {
+                    var newOption = $('<option value="'+ data[i].id_pengguna +'">'+ data[i].nama  +'</option>');
+                    $('#dropdownPetugasAssign_'+ id +'').append(newOption);                    
+                  }   
+                  $('#dropdownPetugasAssign_'+ id +'').trigger("chosen:updated");               
+              },
+              error: function () {                    
+                  alert('Unable to process this request...');
+              }
+          });            
+        };                     
 
         $('#btnUpdateTblListAll').click(function() { 
           var type = $('#reportType_1').val();
@@ -455,11 +619,18 @@
           var branch = $('#dropdownBranchAssign_'+ type +'').val();
           var dateRangeStart = $('#dateRange_start_'+ type +'').val();
           var dateRangeEnd = $('#dateRange_end_'+ type +'').val();
+          var petugas = $('#dropdownPetugasAssign_1').val();
           // generate token
-          var token = generateToken(ministry, department, branch, dateRangeStart, dateRangeEnd);
-
+          var token = generateToken(ministry, department, branch, dateRangeStart, dateRangeEnd, petugas);
+                console.log('token:' +token);
           getRatings(token);
+
+
+            
+               
         });   
+
+
 
         $('#btnUpdateTblListRated').click(function() { 
           var type = $('#reportType_2').val();
@@ -510,7 +681,39 @@
           var token = generateToken(ministry, department, branch, dateRangeStart, dateRangeEnd);          
 
           getFeedback(token);
-        });                 
+        });  
+
+
+        // button kemaskini laporan keseluruhan
+
+         $('#btnUpdateLaporanKeseluruhan').click(function() { 
+
+          var type = $('#reportType_6').val();
+          var ministry = $('#dropdownMinistryAssign_6').val();
+          var department = $('#dropdownDepartmentAssign_6').val();
+          var branch = $('#dropdownBranchAssign_6').val();   
+          var dateRangeStart = $('#dateRange_start_6').val();
+          var dateRangeEnd = $('#dateRange_end_6').val();
+          var petugas = $('#dropdownPetugasAssign_6').val();
+          var pilihanlaporan = $('#dropdownPilihLaporan_6').val();
+
+          if (pilihanlaporan == 'null') alert('Sila Pilih Jenis Laporan');
+          else {
+   // alert ( petugas);
+                 // generate token
+              var token = generateToken(ministry, department, branch, dateRangeStart, dateRangeEnd, petugas, pilihanlaporan );
+               console.log('token:' +token);
+
+               getLaporanKeseluruhan(token);
+              // getRatings(token);
+
+          }
+
+         
+        });         
+
+        // end       
+                
 
         $('#btnResetListAll').click(function() { 
           $('#dateRange_start_1').val('');
@@ -540,7 +743,7 @@
           getUserLog('all');
         });          
 
-        function generateToken(ministry, department, branch, start, end) {          
+        function generateToken(ministry, department, branch, start, end, petugas = '', pilihanlaporan = '') {          
             if ((ministry == "null") && (department == "null") && (branch == "null")) {
               agencyId = 'all';
             } else if ((ministry != "null") && (department == "null") && (branch == "null"))  {
@@ -554,17 +757,18 @@
             }
             //var agencyId = ministry.substring(0,3)+department.substring(3,6)+branch.substring(6,9);            
             var setToken = agencyId+'_'+start+'_'+end; // Token format: <AgencyId>_<DateStart>_<DateEnd>
-            
+            if (petugas != '') setToken = setToken+'_'+petugas;
+            if (pilihanlaporan != '') setToken = setToken+'_'+pilihanlaporan;
             console.log('Token: '+ setToken);
 
           return setToken;
         };
 
-        function getRatings(agencyId) {
+        function getRatings(token) {
             $.ajax({
               type: "GET",
               datatype: "jsonp",                            
-              url: domain+"logmasuk.php/api/report-all/"+agencyId,   
+              url: domain+"index.php/api/report-all/"+token,   
               //data: {name},                                                                        
               success: function(data) {
                     tblListAll.clear().draw();
@@ -581,7 +785,9 @@
                         result.push(item.branch);
                         result.push(item.user_id);
                         result.push(item.name);
-                        result.push(item.picked);                       
+                        result.push(item.picked);  
+                        // result.push(item.perkara);  
+
                         return result;
                     });
                     tblListAll.rows.add(result);
@@ -593,11 +799,11 @@
           })
         };    
 
-        function getRatingsByRated(agencyId) {          
+        function getRatingsByRated(token) {          
             $.ajax({
               type: "GET",
               datatype: "jsonp",                            
-              url: domain+"logmasuk.php/api/report-by-rated/"+agencyId,   
+              url: domain+"index.php/api/report-by-rated/"+token,   
               // data: {name},                                                                        
               success: function(data) {
                     tblListByRated.clear().draw();
@@ -630,12 +836,12 @@
 
         function getRatingsByRatedMonthly(agencyId) {    
             console.log('fethcing data...'+ agencyId);
-            console.log('uri: '+ domain+"logmasuk.php/api/report-rated-monthly-agency-pivot/"+agencyId);
+            console.log('uri: '+ domain+"index.php/api/report-rated-monthly-agency-pivot/"+agencyId);
 
             $.ajax({
               type: "GET",
               datatype: "jsonp",                            
-              url: domain+"logmasuk.php/api/report-rated-monthly-agency-pivot/"+agencyId,   
+              url: domain+"index.php/api/report-rated-monthly-agency-pivot/"+agencyId,   
               // data: {name},                                                                        
               success: function(data) {
                     tblListByRatedMonthly.clear().draw();
@@ -683,7 +889,7 @@
             $.ajax({
               type: "GET",
               datatype: "jsonp",                            
-              url: domain+"logmasuk.php/api/report-feedback/"+agencyId,   
+              url: domain+"index.php/api/report-feedback/"+agencyId,   
               // data: {name},                                                                        
               success: function(data) {
                     tblListByFeedback.clear().draw();
@@ -714,13 +920,80 @@
           })
         }; 
 
-        function getUserLog(agency)
-        {
-        console.log('uri:' +domain+"logmasuk.php/api/user-log/"+agency);
+        // Laporan Purata Tahap Kepuasan 
+
+        function getLaporanPurata(token) {          
             $.ajax({
               type: "GET",
               datatype: "jsonp",                            
-              url: domain+"logmasuk.php/api/user-log/"+agency,   
+              url: domain+"index.php/api/report-laporan-purata/"+token,   
+              // data: {name},                                                                        
+              success: function(data) {
+                    tblListPurata.clear().draw();
+                    var jsonObject = JSON.parse(data);
+                    
+                    var result = jsonObject.map(function (item) {
+                        var result = [];                      
+
+                        result.push(item.rate_id);
+                        result.push(item.petugas);
+                        result.push(item.tarikh);
+                        result.push(item.masa);
+                        result.push(item.perkara);
+                        result.push(item.tahap);                       
+                        return result;
+                    });
+                    tblListPurata.rows.add(result);
+                    tblListPurata.draw();                    
+              },
+              error: function () {                    
+                  alert('Unable to process this request...');
+              }
+          })
+        }; 
+
+        // End Laporan Purata Tahap Kepuasan
+
+        // Laporan keseluruhan 
+
+                function getLaporanKeseluruhan(token) {          
+            $.ajax({
+              type: "GET",
+              datatype: "jsonp",                            
+              url: domain+"index.php/api/report-laporan-keseluruhan/"+token,   
+              // data: {name},                                                                        
+              success: function(data) {
+                    tblListLaporanKeseluruhan.clear().draw();
+                    var jsonObject = JSON.parse(data);
+                    
+                    var result = jsonObject.map(function (item) {
+                        var result = [];                      
+
+                        result.push(item.rate_id);
+                        result.push(item.petugas);
+                        result.push(item.tarikh);
+                        // result.push(item.masa);
+                        result.push(item.perkara);
+                        result.push(item.tahap);              
+                        return result;
+                    });
+                    tblListLaporanKeseluruhan.rows.add(result);
+                    tblListLaporanKeseluruhan.draw();                    
+              },
+              error: function () {                    
+                  alert('Unable to process this request...');
+              }
+          })
+        };
+
+       
+        function getUserLog(agency)
+        {
+        console.log('uri:' +domain+"index.php/api/user-log/"+agency);
+            $.ajax({
+              type: "GET",
+              datatype: "jsonp",                            
+              url: domain+"index.php/api/user-log/"+agency,   
               // data: {name},                                                                        
               success: function(data) {
                     tblListUserLog.clear().draw();

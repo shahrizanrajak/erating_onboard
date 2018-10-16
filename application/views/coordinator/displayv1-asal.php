@@ -62,7 +62,7 @@
            <tr>
             <td align="center">
               <font size="4" color="#ffffff"><?php echo date('l'); ?>, <span id="servertime"></span></font> <br />              
-              <a href="<?php echo base_url(); ?>logmasuk.php/logout">
+              <a href="<?php echo base_url(); ?>index.php/logout">
                 <font size="5.5" color="#ffffff">
                   <?php echo $this->session->userdata('logged_user'); ?>
                 </font>

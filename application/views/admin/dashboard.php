@@ -7,9 +7,9 @@
         <script src="<?php echo base_url(); ?>templates/js/dev/dashboard.js" type="text/javascript"></script>          
         <!-- Morris.js charts -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-        <script src="<?php echo base_url(); ?>templates/adminlte/plugins/morris/morris.min.js" type="text/javascript"></script>              
+        <script src="<?php echo base_url(); ?>templates/adminlte/plugins/morris/morris.js" type="text/javascript"></script>              
         <!-- Logo -->
-        <a href="<?php echo base_url(); ?>" class="logo">
+        <a href="<?php echo base_url(); ?>index.php/dashboard" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <span class="logo-mini">+</span>
           <!-- logo for regular state and mobile devices -->
@@ -44,10 +44,10 @@
                   <!-- Menu Footer-->
                   <li class="user-footer">
                     <div class="pull-left">
-                      <a href="<?php echo base_url(); ?>logmasuk.php/user" class="btn btn-default btn-flat">Profile</a>
+                      <a href="<?php echo base_url(); ?>index.php/user" class="btn btn-default btn-flat">Profile</a>
                     </div>
                     <div class="pull-right">
-                      <a href="<?php echo base_url(); ?>logmasuk.php/logout" class="btn btn-default btn-flat">Sign out</a>
+                      <a href="<?php echo base_url(); ?>index.php/logout" class="btn btn-default btn-flat">Sign out</a>
                     </div>
                   </li>
                 </ul>
@@ -70,48 +70,48 @@
               <img src="<?php echo $avatar; ?>" class="img-circle" alt="User Image" />
             </div>
             <div class="pull-left info">
-              <p><?php echo $this->session->userdata('logged_user'); ?></p>   
+              <p><?php echo $this->session->userdata('role'); ?></p>   
               <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
           </div>
           <!-- search form -->
-          <form action="#" method="get" class="sidebar-form">
+         <!--  <form action="#" method="get" class="sidebar-form">
             <div class="input-group">
               <input type="text" name="q" class="form-control" placeholder="Search..." />
               <span class="input-group-btn">
                 <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
               </span>
             </div>
-          </form>
+          </form> -->
           <!-- /.search form -->
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
             <li class="treeview active">
-              <a href="<?php echo base_url(); ?>logmasuk.php/dashboard">
+              <a href="<?php echo base_url(); ?>index.php/dashboard">
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
               </a>
             </li>
             <li class="treeview">
-              <a href="<?php echo base_url(); ?>logmasuk.php/erating-list">
+              <a href="<?php echo base_url(); ?>index.php/erating-list">
                 <i class="fa fa-th"></i>
                 <span>Tetapan E-Rating</span>                
               </a>
             </li>             
             <li class="treeview">
-              <a href="<?php echo base_url(); ?>logmasuk.php/configuration">
+              <a href="<?php echo base_url(); ?>index.php/configuration">
                 <i class="fa fa-cog"></i>
                 <span>Tetapan Sistem</span>
               </a>
             </li>                      
             <li>
-              <a href="<?php echo base_url(); ?>logmasuk.php/report">
+              <a href="<?php echo base_url(); ?>index.php/report">
                 <i class="fa fa-bar-chart"></i>
                 <span>Laporan</span>                
               </a>
             </li> 
             <li>
-              <a href="<?php echo base_url(); ?>logmasuk.php/user">
+              <a href="<?php echo base_url(); ?>index.php/user">
                 <i class="fa fa-user"></i> <span>Maklumat Diri</span>
               </a>
             </li> 
@@ -123,8 +123,32 @@
       <div class="content-wrapper">        
         <!-- Content Header (Page header) -->
         <section class="content-header">
+        <h1>
+        <!-- <center><p><?php echo $this->session->userdata('email'); ?></p></center>
+        <center><p><?php echo $this->session->userdata('login_key'); ?></p></center>
+        <center><p><?php echo $this->session->userdata('logged_id'); ?></p></center>
+        <center><p><?php echo $this->session->userdata('logged_ic'); ?></p></center> -->
+       <!--  <center><p><?php echo $this->session->userdata('logged_user'); ?></p></center> -->
+        <!-- <center><p><?php echo $this->session->userdata('role'); ?></p></center> -->
+        <center><p>
+        <?php 
+        $kodAgensi = $this->session->userdata('agency');
+        // $namaMinistry = $this->Department_model->find_agency_by_id($kodAgensi)['ministry'];
+        // $namaJabatan = $this->Department_model->find_agency_by_id($kodAgensi)['department'];
+        // $namaCawangan = $this->Department_model->find_agency_by_id($kodAgensi)['branch'];
+
+        // if ($namaCawangan != '' ) echo $namaCawangan;
+        // elseif ($namaJabatan != '') echo $namaJabatan;
+        // else echo $namaMinistry;
+
+        ?></p></center>
+        <!-- <center><p><?php echo $this->session->userdata('1'); ?></p></center> -->
+        <!-- <h6><?php echo $agency_data['branch']; ?></h6> -->
+       
+
+        </h1>
           <h1>
-            Dashboard
+            Dashboard 
             <small>Statistik <?php //echo mydomain; ?></small>
           </h1>
           <ol class="breadcrumb">
@@ -142,7 +166,7 @@
                 <span class="info-box-icon bg-aqua"><i class="fa fa-university"></i></span>
                 <div class="info-box-content"
                   onMouseOver="this.style.cursor='pointer'"
-                  onclick="javascript:location.href='<?php echo base_url(); ?>logmasuk.php/erating-list'">                
+                  onclick="javascript:location.href='<?php echo base_url(); ?>index.php/erating-list'">                
                   <span class="info-box-text">Agensi e-Rating</span>
                   <span id="txtTotalAgencyActive" class="info-box-number"><?php echo $stats_agency_active; ?></span>
                   <!-- <span id="txtTotalAgencyActive" class="info-box-number"><?php echo $stats_user_active; ?></span> -->
@@ -157,7 +181,7 @@
                 <span class="info-box-icon bg-green"><i class="fa fa-users"></i></span>
                 <div class="info-box-content" 
                   onMouseOver="this.style.cursor='pointer'"
-                  onclick="javascript:location.href='<?php echo base_url(); ?>logmasuk.php/erating-list'">
+                  onclick="javascript:location.href='<?php echo base_url(); ?>index.php/erating-list'">
                   <span class="info-box-text">Pengguna Aktif</span>
                   <span id="txtTotalActive" class="info-box-number"><?php echo $stats_user_active; ?></span>
                 </div><!-- /.info-box-content -->             
@@ -168,7 +192,7 @@
                 <span class="info-box-icon bg-yellow"><i class="fa fa-check-square-o"></i></span>
                 <div class="info-box-content"
                   onMouseOver="this.style.cursor='pointer'"
-                  onclick="javascript:location.href='<?php echo base_url(); ?>logmasuk.php/case-action/forward'">                
+                  onclick="javascript:location.href='<?php echo base_url(); ?>index.php/report'">                
                   <span class="info-box-text">Rating Hari Ini</span>
                   <span id="txtTotalRating" class="info-box-number"><?php echo $stats_total_rating; ?></span>
                 </div><!-- /.info-box-content -->               
@@ -181,7 +205,7 @@
                 <span class="info-box-icon bg-red"><i class="fa fa-comments"></i></span>
                 <div class="info-box-content"
                   onMouseOver="this.style.cursor='pointer'"
-                  onclick="javascript:location.href='<?php echo base_url(); ?>logmasuk.php/case-action/rejected'">                
+                  onclick="javascript:location.href='<?php echo base_url(); ?>index.php/report'">                
                   <span class="info-box-text">Jumlah Aduan</span>
                   <span id="txtTotalComment" class="info-box-number"><?php echo $stats_total_comment; ?></span>
                 </div><!-- /.info-box-content -->                
@@ -213,7 +237,7 @@
                         <table id="tblActivate" class="table table-bordered table-striped" width="%">
                           <thead>
                             <tr>  
-                              <th bgcolor="#00FFFF" width="20%">Cemerlang</br> </th>  
+                              <th bgcolor="#0b62a4" width="20%">Cemerlang</br> </th>  
                               <th bgcolor="#00a65a" width="20%">Memuaskan</br> </th>  
                               <th bgcolor="#d2d6de" width="20%">Sederhana Memuaskan</br> </th>  
                               <th bgcolor="#f39c12" width="20%">Kurang Memuaskan</br> </th>                     
@@ -237,7 +261,7 @@
 
               <div class="box box-default">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Rating Hari Ini pie</h3>
+                  <h3 class="box-title">Rating Hari Ini</h3>
                   <div class="box-tools pull-right">
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                     <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -252,7 +276,7 @@
                     </div><!-- /.col -->
                     <div class="col-md-5">
                       <ul class="chart-legend clearfix">
-                        <li><i class="fa fa-circle-o text-aqua"></i> Cemerlang</li>
+                        <li><i class="fa fa-circle-o text-blue"></i> Cemerlang</li>
                         <li><i class="fa fa-circle-o text-green"></i> Memuaskan</li>
                         <li><i class="fa fa-circle-o text-gray"></i> Sederhana Memuaskan</li>
                         <li><i class="fa fa-circle-o text-yellow"></i> Kurang Memuaskan</li>                      
@@ -298,25 +322,25 @@
 
 <!--   akhir bar graf rating hari ini -->
 
-              <div class="box box-default">
-                <div class="box-header with-border">
+              <!-- <div class="box box-default"> -->
+                <!-- <div class="box-header with-border"> -->
                   <!-- <h3 class="box-title">3 Rating Tertinggi Hari Ini</h3> -->
-                  <div class="box-tools pull-right">
-                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                  </div>
-                </div><!-- /.box-header -->
-                <div class="box-footer no-padding">
-                  <ul class="nav nav-pills nav-stacked">                    
+                  <!-- <div class="box-tools pull-right"> -->
+                    <!-- <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button> -->
+                    <!-- <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i> </button> -->
+                  <!-- </div> -->
+                <!-- </div>/.box-header -->
+                <!-- <div class="box-footer no-padding"> -->
+                  <!-- <ul class="nav nav-pills nav-stacked">                    
                       <?php 
                         // foreach ($stats_agency_top_three as $agency) {
                           // echo "<option value=". $ministry['Kod_Kem'] .">". $ministry['Kod_Kem']." ". $ministry['Kementerian'] ."</option>";
                           // echo '<li><a href="#">'. $agency["branch"] .'<span class="pull-right text-green">'. $agency["total"]  .'</span></a></li>';
                         // }
                       ?>                                        
-                  </ul>
-                </div><!-- /.footer -->
-              </div><!-- /.box -->                                       
+                  </ul> -->
+                <!-- </div>/.footer -->
+              <!-- </div><!-- /.box -->                                        
                 <!-- /.box -->
             </section><!-- /.Left col -->       
 
@@ -326,7 +350,7 @@
               <div class="box box-solid">
               <div class="nav-tabs-custom">                
                 <ul class="nav nav-tabs pull-right">                                                
-                  <li class="pull-left header"><i class="fa fa-bar-chart"></i> Jumlah Rating Bulanan</li>
+                  <li class="pull-left header"><i class="fa fa-bar-chart"></i> Jumlah Rating Bulanan Tahun <?php echo date("Y"); ?></li>
                 </ul>
                 <div class="tab-content no-padding">                  
                   <div class="chart" id="stats-monthly" style="position: relative; height: 362px;"></div>  </div>
@@ -383,7 +407,7 @@
         <div class="pull-right hidden-xs">
           <b>Version</b> 1.0
         </div>
-        <strong>Copyright &copy; 2016 <a href="<?php echo mydomain; ?>">E-Rating Development Team</a>.</strong> All rights reserved.
+        <strong>Copyright &copy; 2016 <a href="<?php echo base_url(); ?>index.php/dashboard">E-Rating Development Team</a>.</strong> All rights reserved.
       </footer>
 
       <!-- Control Sidebar -->

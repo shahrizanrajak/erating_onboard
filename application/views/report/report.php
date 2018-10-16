@@ -10,11 +10,11 @@
         <script src="<?php echo base_url(); ?>templates/adminlte/plugins/datatables/buttons.html5.min.js" type="text/javascript"></script>  
         <script src="<?php echo base_url(); ?>templates/adminlte/plugins/datatables/buttons.print.min.js" type="text/javascript"></script>  
         <!-- Logo -->
-        <a href="index2.html" class="logo">
+        <a href="<?php echo base_url(); ?>index.php/dashboard" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <span class="logo-mini">+</span>
           <!-- logo for regular state and mobile devices -->
-          <span class="logo-lg"><b>e</b>RATING</span>
+          <span class="logo-lg"><b>e-</b>RATING</span>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
@@ -45,10 +45,10 @@
                   <!-- Menu Footer-->
                   <li class="user-footer">
                     <div class="pull-left">
-                      <a href="#" class="btn btn-default btn-flat">Profile</a>
+                      <a href="<?php echo base_url(); ?>index.php/user" class="btn btn-default btn-flat">Profile</a>
                     </div>
                     <div class="pull-right">
-                      <a href="<?php echo base_url(); ?>logmasuk.php/logout" class="btn btn-default btn-flat">Sign out</a>
+                      <a href="<?php echo base_url(); ?>index.php/logout" class="btn btn-default btn-flat">Sign out</a>
                     </div>
                   </li>
                 </ul>
@@ -73,43 +73,43 @@
             </div>
           </div>
           <!-- search form -->
-          <form action="#" method="get" class="sidebar-form">
+         <!--  <form action="#" method="get" class="sidebar-form">
             <div class="input-group">
               <input type="text" name="q" class="form-control" placeholder="Search..." />
               <span class="input-group-btn">
                 <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
               </span>
             </div>
-          </form>
+          </form> -->
           <!-- /.search form -->
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
             <li>
-              <a href="<?php echo base_url(); ?>logmasuk.php/dashboard">
+              <a href="<?php echo base_url(); ?>index.php/dashboard">
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
               </a>
             </li>
             <li class="treeview">
-              <a href="<?php echo base_url(); ?>logmasuk.php/erating-list">
+              <a href="<?php echo base_url(); ?>index.php/erating-list">
                 <i class="fa fa-th"></i>
                 <span>Tetapan E-Rating</span>                
               </a>
             </li>    
             <li class="treeview">
-              <a href="<?php echo base_url(); ?>logmasuk.php/configuration">
+              <a href="<?php echo base_url(); ?>index.php/configuration">
                 <i class="fa fa-cog"></i>
                 <span>Tetapan Sistem</span>                
               </a>
             </li>                      
             <li class="active">
-              <a href="<?php echo base_url(); ?>logmasuk.php/report">
+              <a href="<?php echo base_url(); ?>index.php/report">
                 <i class="fa fa-bar-chart"></i>
                 <span>Laporan</span>                
               </a>
             </li> 
             <li>
-              <a href="<?php echo base_url(); ?>logmasuk.php/user">
+              <a href="<?php echo base_url(); ?>index.php/user">
                 <i class="fa fa-user"></i> <span>Maklumat Diri</span>
               </a>
             </li>                        
@@ -122,12 +122,15 @@
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
+         <h1>
+        <center><p><?php echo $this->session->userdata('email'); ?></p></center>
+        </h1>
           <h1>
             Laporan
             <small>Data eRating</small>
           </h1>          
           <ol class="breadcrumb">
-            <li><a href="<?php echo base_url(); ?>logmasuk.php/dashboard"><i class="fa fa-dashboard"></i> Utama</a></li>
+            <li><a href="<?php echo base_url(); ?>index.php/dashboard"><i class="fa fa-dashboard"></i> Utama</a></li>
             <li class="active">Laporan</li>
           </ol>
         </section> 
@@ -142,11 +145,14 @@
                 <div class="box-body">  
                  <div class="panel-heading">
                     <ul class="nav nav-tabs" id="erating-tabs">
-                      <li class="active"><a href="#tabStatsq" id="erating-tabStats" data-toggle="tab">Laporan Terpeinci</a></li>
+                     
+                      <li class="active"><a href="#tabStats" id="erating-tabStats" data-toggle="tab">Laporan Terperinci</a></li>
                       <li><a href="#tabAgency" id="erating-tabAgency" data-toggle="tab">Mengikut Agensi</a></li>
                       <li><a href="#tabMonthly" id="erating-tabMonthly" data-toggle="tab">Mengikut Bulan</a></li>    
-                      <li><a href="#tabFeedback" id="erating-tabMonthly" data-toggle="tab">Maklumbalas Aduan</a></li>                                                        
-                      <li><a href="#tabUserLog" id="erating-tabUserLog" data-toggle="tab">Log Pengguna</a></li>                                                          
+                      <li><a href="#tabFeedback" id="erating-tabMonthly" data-toggle="tab">Maklumbalas Aduan</a></li>
+                      <li><a href="#tabUserLog" id="erating-tabUserLog" data-toggle="tab">Log Pengguna</a></li>
+                      <li ><a href="#tabKeseluruhan" id="erating-tabKeseluruhan" data-toggle="tab">Laporan Kurang & Tidak Memuaskan</a></li>
+                                                                       
                     </ul>
                   </div>
                   <div class="panel-body">
@@ -176,6 +182,12 @@
                                 <option value=null>Pilih Cawangan</option>
                               </select>
                           </div> 
+
+                          <div class="form-group">                            
+                              <select class="form-control" id="dropdownPetugasAssign_1">
+                                <option value=null>Pilih Petugas</option>
+                              </select>
+                          </div>
                           <!-- will change according to the above selection -->
 <!--                           <div class="form-group">                            
                               <select class="form-control" id="dropdownUserAssign_1">
@@ -190,8 +202,8 @@
                                 <i class="fa fa-calendar"></i>
                               </div>
                               <input type="text" class="form-control pull-right" id="dateRange" placeholder="Tarikh Laporan"/>
-                              <input type="hidden" id="dateRange_start_1">
-                              <input type="hidden" id="dateRange_end_1">
+                              <input type="hidden" id="dateRange_start_1" value="<?php echo date('Y-m-d'); ?>">
+                              <input type="hidden" id="dateRange_end_1"  value="<?php echo date('Y-m-d'); ?>">
                             </div>
                           </div>
                           <div class="modal-footer">
@@ -249,8 +261,8 @@
                                 <i class="fa fa-calendar"></i>
                               </div>
                               <input type="text" class="form-control pull-right" id="dateRange_2" placeholder="Tarikh Laporan"/>
-                              <input type="hidden" id="dateRange_start_2">
-                              <input type="hidden" id="dateRange_end_2">
+                              <input type="hidden" id="dateRange_start_2"  value="<?php echo date('Y-m-d'); ?>">
+                              <input type="hidden" id="dateRange_end_2"  value="<?php echo date('Y-m-d'); ?>">
                             </div>
                           </div>                                                                                 
                           <div class="modal-footer">
@@ -268,7 +280,7 @@
                               <th width="15%">Bahagian</br></th>
                               <th width="5%">Tidak Memuaskan</br></th>                                                      
                               <th width="5%">Kurang Memuaskan</br></th>                                                      
-                              <th width="5%">Sederhana Memuaskan</br></th>                                                      
+                              <th width="5%">Sederhana Memuaskan</br></th>                                                   
                               <th width="5%">Memuaskan</br></th>                                                      
                               <th width="5%">Cemerlang</br></th>                                                      
                               <th width="10%">Jumlah</br></th>                                                      
@@ -364,8 +376,8 @@
                                 <i class="fa fa-calendar"></i>
                               </div>
                               <input type="text" class="form-control pull-right" id="dateRange_5" placeholder="Tarikh Laporan"/>
-                              <input type="hidden" id="dateRange_start_5">
-                              <input type="hidden" id="dateRange_end_5">
+                              <input type="hidden" id="dateRange_start_5"  value="<?php echo date('Y-m-d'); ?>">
+                              <input type="hidden" id="dateRange_end_5"  value="<?php echo date('Y-m-d'); ?>">
                             </div>
                           </div>                                                                                 
                           <div class="modal-footer">
@@ -381,11 +393,11 @@
                               <th width="15%">Jabatan</br></th>                     
                               <th width="15%">Cawangan</br></th>                        
                               <th width="15%">Bahagian</br></th>
-                              <th width="5%">A</br></th>                                                      
-                              <th width="5%">B</br></th>                                                      
-                              <th width="5%">C</br></th>                                                      
-                              <th width="5%">D</br></th>                                                      
-                              <th width="5%">E</br></th>                                                      
+                              <th width="5%">Tidak senyum</br></th>                                                      
+                              <th width="5%">Cakap kasar</br></th>                                                      
+                              <th width="5%">Maklumat tidak lengkap</br></th>                                                      
+                              <th width="5%">Sambil lewa</br></th>                                                      
+                              <th width="5%">Kurang Informasi</br></th>                                                      
                               <th width="10%">Jumlah</br></th>                                                      
                             </tr>
                           </thead>
@@ -393,6 +405,88 @@
                         </table>                                             
                       </div>  
 
+
+                      <!-- report keseluruhan -->
+
+                      <div class="tab-pane fade" id="tabKeseluruhan">
+                        <form id="form_agency" class="form_agency" action=""> 
+                          <input type="hidden" name="reportType_6" id="reportType_6" value="6"/>                 
+                          <div class="form-group">                                  
+                            <select class="form-control" id="dropdownMinistryAssign_6">
+                              <option value=null>Pilih Kementerian</option>
+                              <?php 
+                              foreach ($ministry_data as $ministry) {
+                                echo "<option value=". $ministry['Kod_Kem'] .">". $ministry['Kod_Kem']." ". $ministry['Kementerian'] ."</option>";
+                              }
+                              ?>                          
+                            </select>
+                          </div> 
+                          <!-- will change according to the above selection -->
+                          <div class="form-group">                            
+                              <select class="form-control" id="dropdownDepartmentAssign_6">
+                                <option value=null>Pilih Jabatan</option>
+                              </select>
+                          </div>  
+                          <!-- will change according to the above selection -->
+                          <div class="form-group">                            
+                              <select class="form-control" id="dropdownBranchAssign_6">
+                                <option value=null>Pilih Cawangan</option>
+                              </select>
+                          </div>  
+                         <!-- Date range -->
+                          <div class="form-group">
+                            <!-- <label>Date range:</label> -->
+                            <div class="input-group">
+                              <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                              </div>
+                              <input type="text" class="form-control pull-right" id="dateRange_6" placeholder="Tarikh Laporan"/>
+                              <input type="hidden" id="dateRange_start_6"  value="<?php echo date('Y-m-d'); ?>">
+                              <input type="hidden" id="dateRange_end_6"  value="<?php echo date('Y-m-d'); ?>">
+                            </div>
+                          </div>   
+
+                           <!-- will change according to the above selection -->
+                          <div class="form-group">                            
+                              <select class="form-control" id="dropdownPetugasAssign_6">
+                                <option value=null>Pilih Petugas</option>
+                              </select>
+                          </div> 
+
+                              <!-- Pilihan jenis laporan  -->
+                          <div class="form-group">                            
+                              <select class="form-control" id="dropdownPilihLaporan_6">
+                                <option value=null >Pilih Laporan</option>
+                                <!-- <option value="1">Laporan Purata tahap kepuasan pelanggan berdasarkan tarikh dan petugas kaunter</option>
+                                <option value="2" >Laporan terperinci tahap kepuasan pelanggan berdasarkan tarikh dan  -->petugas kaunter</option>
+                                <option value="3" >Laporan Kurang Memuaskan</option>
+                                <option value="4" >Laporan Tidak Memuaskan</option>
+                              </select>
+                          </div> 
+
+                          <div class="modal-footer">
+                            <button type="reset" id="btnResetListUserLog" class="btn btn-default btn-sm"> <i class='fa fa-mail-reply'></i> &nbsp; Set Semula</button>
+                            <button type="button" id="btnUpdateLaporanKeseluruhan" class="btn btn-primary btn-sm"><i class='fa fa-check'></i> Kemaskini</button>                    
+                          </div>
+
+                          </form>                        
+                            <table id="tblListLaporanKeseluruhan" class="table table-bordered table-striped" width="100%">
+                              <thead>
+                              <tr>  
+                              <th width="5%">Rate ID</br></th> 
+                              <th width="20%">Petugas</br></th>  
+                              <th width="15%">Tarikh</br></th>                     
+                              <!-- <th width="15%">Masa</br></th>                         -->
+                              <th width="15%">Perkara</br></th>  
+                              <th width="15%">Tahap</br></th>                      
+                              </thead>
+                              <tbody></tbody>
+                            </table>
+                                                                      
+                          </div>     
+
+
+ 
                       <div class="tab-pane fade" id="tabUserLog">
                         <form id="form_agency" class="form_agency" action=""> 
                           <input type="hidden" name="reportType_4" id="reportType_4" value="4"/>                 
@@ -426,8 +520,8 @@
                                 <i class="fa fa-calendar"></i>
                               </div>
                               <input type="text" class="form-control pull-right" id="dateRange_4" placeholder="Tarikh Laporan"/>
-                              <input type="hidden" id="dateRange_start_4">
-                              <input type="hidden" id="dateRange_end_4">
+                              <input type="hidden" id="dateRange_start_4" value="<?php echo date('Y-m-d'); ?>">
+                              <input type="hidden" id="dateRange_end_4" value="<?php echo date('Y-m-d'); ?>">
                             </div>
                           </div>                                                                                 
                           <div class="modal-footer">
@@ -466,7 +560,7 @@
           <input type="hidden" id="base_url" name="base_url" value="<?php echo mydomain; ?>">          
           <b>Version</b> 1.0
         </div>
-        <strong>Copyright &copy; 2016 <a href="<?php echo mydomain; ?>">E-Rating Development Team</a>.</strong> All rights reserved.
+        <strong>Copyright &copy; 2016 <a href="<?php echo base_url(); ?>index.php/dashboard">E-Rating Development Team</a>.</strong> All rights reserved.
       </footer>
       <!-- Control Sidebar -->
       <aside class="control-sidebar control-sidebar-dark"></aside><!-- /.control-sidebar -->

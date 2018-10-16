@@ -24,8 +24,9 @@
         <!-- ERating operations -->
         <script src="<?php echo base_url(); ?>templates/js/dev/erating.js" type="text/javascript"></script>  
         <script src="<?php echo base_url(); ?>templates/js/dev/report.js" type="text/javascript"></script>                  
+        <script src="<?php echo base_url(); ?>templates/js/dev/dashboard.js" type="text/javascript"></script>                  
         <!-- Logo -->
-        <a href="<?php echo base_url(); ?>" class="logo">
+        <a href="<?php echo base_url(); ?>index.php/dashboard" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <span class="logo-mini">+</span>
           <!-- logo for regular state and mobile devices -->
@@ -61,10 +62,10 @@
                   <!-- Menu Footer-->
                   <li class="user-footer">
                     <div class="pull-left">
-                      <a href="#" class="btn btn-default btn-flat">Profile</a>
+                      <a href="<?php echo base_url(); ?>index.php/user" class="btn btn-default btn-flat">Profile</a>
                     </div>
                     <div class="pull-right">
-                      <a href="<?php echo base_url(); ?>logmasuk.php/logout" class="btn btn-default btn-flat">Sign out</a>
+                      <a href="<?php echo base_url(); ?>index.php/logout" class="btn btn-default btn-flat">Sign out</a>
                     </div>
                   </li>
                 </ul>
@@ -88,20 +89,20 @@
             </div>
           </div>
           <!-- search form -->
-          <form action="#" method="get" class="sidebar-form">
+          <!-- <form action="#" method="get" class="sidebar-form">
             <div class="input-group">
               <input type="text" name="q" class="form-control" placeholder="Search..." />
               <span class="input-group-btn">
                 <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
               </span>
             </div>
-          </form>
+          </form> -->
           <!-- /.search form -->
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
             <li>
-              <a href="<?php echo base_url(); ?>logmasuk.php/dashboard">
+              <a href="<?php echo base_url(); ?>index.php/dashboard">
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
               </a>
             </li>
@@ -113,24 +114,24 @@
               </a>
               <ul class="treeview-menu">
                 <li><a href="#" id="erating-new"><i class="fa fa-university"></i> Daftar Agensi</a></li>
-                <li><a href="<?php echo base_url(); ?>logmasuk.php/erating-list"><i class="fa fa-user-plus"></i> Kemaskini Pengguna</a></li>
+                <li><a href="<?php echo base_url(); ?>index.php/erating-list"><i class="fa fa-user-plus"></i> Kemaskini Pengguna</a></li>
                
               </ul>
             </li>    
             <li class="treeview">
-              <a href="<?php echo base_url(); ?>logmasuk.php/configuration">
+              <a href="<?php echo base_url(); ?>index.php/configuration">
                 <i class="fa fa-cog"></i>
                 <span>Tetapan Sistem</span>
               </a>
             </li>                      
             <li>
-              <a href="<?php echo base_url(); ?>logmasuk.php/report">
+              <a href="<?php echo base_url(); ?>index.php/report">
                 <i class="fa fa-bar-chart"></i>
                 <span>Laporan</span>                
               </a>
             </li> 
             <li>
-              <a href="<?php echo base_url(); ?>logmasuk.php/user">
+              <a href="<?php echo base_url(); ?>index.php/user">
                 <i class="fa fa-user"></i> <span>Maklumat Diri</span>
               </a>
             </li>                        
@@ -143,12 +144,15 @@
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
+         <h1>
+        <center><p><?php echo $this->session->userdata('email'); ?></p></center>
+        </h1>
           <h1>
-            Tetapan Antaramuka
+            Tetapan Antaramukaed
             <small>Mengikut agensi berdaftar</small>
           </h1>          
           <ol class="breadcrumb">
-            <li><a href="<?php echo base_url(); ?>logmasuk.php/dashboard"><i class="fa fa-dashboard"></i> Utama</a></li>
+            <li><a href="<?php echo base_url(); ?>index.php/dashboard"><i class="fa fa-dashboard"></i> Utama</a></li>
             <li class="active">Tetapan</li>
           </ol>
         </section> 
@@ -161,7 +165,7 @@
             <div class="col-xs-12">
               <div class="box">
                 <div class="box-header">
-                  <h3 class="box-title"><?php echo $status_type; ?></h3> 
+                  <!-- <h3 class="box-title"><?php echo $status_type; ?></h3>  -->
                 </div>
                 <!-- /.box-header -->
 <!--                <div id="map_wrapper">
@@ -206,7 +210,7 @@
         <div class="pull-right hidden-xs">
           <b>Version</b> 1.0
         </div>
-        <strong>Copyright &copy; 2016 <a href="<?php echo mydomain; ?>">E-Rating Development Team</a>.</strong> All rights reserved.
+        <strong>Copyright &copy; 2016 <a href="<?php echo base_url(); ?>index.php/dashboard">E-Rating Development Team</a>.</strong> All rights reserved.
       </footer>
 
       <!-- Control Sidebar -->
@@ -279,7 +283,8 @@
                         </select>
                     </div> 
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-default btn-sm" data-dismiss="modal"><i class='fa fa-ban'></i> Tutup</button>                      
+                      <button type="button" class="btn btn-default btn-sm" data-dismiss="modal"><i class='fa fa-ban'></i> Tutup</button>
+                            
                       <button type="button" id="btnSaveAgency" class="btn btn-primary btn-sm"><i class='fa fa-check'></i> Simpan</button>                    
                       <button type="button" id="btnUpdateAgency" class="btn btn-primary btn-sm"><i class='fa fa-check'></i> Kemaskini</button>                    
                     </div>                                                                                                    
@@ -373,7 +378,7 @@
                       <tr>  
                         <th width="5%">ID</br> </th>  
                         <th width="35%">Nama Penuh</br> </th>
-                        <th width="30%">No K/P </br> </th>
+                        <th width="30%">Jawatan </br> </th>
                         <!-- <th width="30%">Jawatan </br> </th> -->
                         <th width="20%">Akses</br> </th>                                              
                         <th width="10%">Tindakan</br> </th>
@@ -415,12 +420,20 @@
 
                           <input type="file" name="file-photo" id="file-photo">
                           <div  style="padding:10px;"><h7>(Pastikan logo dalam format png atau gif berukuran 100x100)</h7></div>
-                          <input type="text" id="userId" class="form-control" placeholder="ID Pengguna" disabled> 
-                          <div id="message-photo"></div>                    
-                          <!-- <div id="base64-logo"></div> -->
-                          <!-- <textarea class="form-control" id="base64-logo"></textarea> -->                              
+                          <input type="text" id="userId" class="form-control" placeholder="ID Pengguna" disabled>
+
+
+                          <div id="qr_image_preview" style="padding:20px;">
+
+
+                              
+                          </div>
+                      
                         </div>                                                
                         </td>
+                        
+
+
                         <td width="5%">&nbsp;</td>
                         <td width="55%">                          
                           <label for="user-name" class="control-label">Nama Penuh:</label>
@@ -458,15 +471,147 @@
                     </table> 
                   </div>                                    
                   <div class="modal-header" align="right">
+
+                    
+
+              
+                          <script>
+                              function enablebtncetak() {
+                                 // document.getElementById("btnCetak").disabled = false;
+                                document.getElementById("btnCetak").style.display ="initial";
+                                document.getElementById("btnGenerateQrcode").style.display ="none";
+                                document.getElementById("qr_image_preview").style.display ="initial";
+                              }
+                          </script>
+
+                       
+                    
+                          <button type="button" id="btnGenerateQrcode" class="btn btn-default btn-sm" onclick="enablebtncetak()" ><i class='fa fa-qrcode'></i> &nbsp; Qrcode</button>
+                          <button type="button" class="btn btn-default btn-sm" id="btnCetak" style="display: none" > <i class='fa fa-print'> </i> &nbsp; Cetak</button>
+                 
+
+
+
+                    <!-- <button type="button" class="btn btn-default btn-sm" id="btnCetak"> <i class='fa fa-print'></i> &nbsp; Cetak</button> -->
+
                     <button type="button" id="btnListUser" class="btn btn-default btn-sm" data-dismiss="modal"> <i class='fa fa-ban'></i> &nbsp; Tutup</button>
-                    <button type="reset" class="btn btn-default btn-sm"> <i class='fa fa-mail-reply'></i> &nbsp; Set Semula</button>                
-                    <button type="button" id="btnSaveUser" class="btn btn-primary btn-sm"> <i class='fa fa-check'></i> <span class="ui-button-text"> &nbsp; Simpan</span></button>                                    
+                    <button type="reset" class="btn btn-default btn-sm"> <i class='fa fa-mail-reply'></i> &nbsp; Set Semula</button>  
+                    <!-- <button type="button" class="btn btn-default btn-sm" id="btnGenerateQrcode"> <i class='fa fa-qrcode'></i> &nbsp; Qrcode</button>               -->
+                    <button type="button" id="btnSaveUser" class="btn btn-primary btn-sm"> <i class='fa fa-check'></i> <span class="ui-button-text"> &nbsp; Simpan</span></button>
+
                   </div>                                                                                                                                                                  
             </div>
            </form>
+
+
+    
         </div>
       </div>
     </div>  
+
+
+    <!-- form cetak mula -->
+
+    <div class="modal fade" id="AddUserCetak" tabindex="-1" role="dialog" aria-labelledby="AddUserCetak">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="UserCetakLabel">Cetak Maklumat Pengguna</h4>
+          </div>
+          <form id="frmUserInfo" action="" method="post" enctype="multipart/form-data">  
+          <div class="modal-body">         
+                                                
+                  <div class="form-group">
+                    <table width="100%">
+                      <tr>                        
+                        <td valign="top" width="40%">
+                        <div class="form-group" align="center">                          
+                          <h5>Gambar Profil</h5>
+                          <!-- <label for="erating-logo" class="control-label">Muat Naik Logo Agensi</label> -->
+                          <div id="image_preview" style="padding:20px;">
+                              <img id="preview-photo" src="<?php echo base_url(); ?>templates/images/noimage.png" alt="User Image" />
+                          </div>
+
+                          <input type="file" name="file-photo" id="file-photo">
+                          <div  style="padding:10px;"><h7>(Pastikan logo dalam format png atau gif berukuran 100x100)</h7></div>
+                          <input type="text" id="userId" class="form-control" placeholder="ID Pengguna" disabled>
+
+
+                          <div id="qr_image_preview" style="padding:20px;" >
+                          <!-- <div id="qr_image_preview" style="display: none"; > -->
+
+
+                              
+                          </div>
+                      
+                        </div>                                                
+                        </td>
+                        
+
+
+                        <td width="5%">&nbsp;</td>
+                        <td width="55%">                          
+                          <label for="user-name" class="control-label">Nama Penuh:</label>
+                          <input type="text" class="form-control" id="user-name" placeholder="Nama Penuh"> 
+                          <label for="user-ic" class="control-label">No Kad Pengenalan:</label>                        
+                          <input type="text" class="form-control" id="user-ic" placeholder="No Kad Pengenalan"> 
+                         <!--  <label for="user-login" class="control-label">Nama Login:</label>        
+                          <input type="text" class="form-control" id="user-login" placeholder="Nama Login">  -->
+                          <label for="user-pwd" class="control-label">Kata Laluan:</label> 
+                          <input type="text" class="form-control" id="user-pwd" placeholder="Kata Laluan">       
+                          <label for="user-post" class="control-label">Jawatan:</label>
+                          <input type="text" class="form-control" id="user-post" placeholder="Jawatan">      
+                          <label for="user-email" class="control-label">Emel:</label>
+                          <input type="text" class="form-control" id="user-email" placeholder="Emel Rasmi">  
+                          <label for="user-phone" class="control-label">No. Tel:</label>
+                          <input type="text" class="form-control" id="user-phone" placeholder="No. Tel Pejabat">     
+
+
+                          <label for="udropdown-user-access" class="control-label">Capaian:</label>              
+                          <select class="form-control" id="dropdown-user-access">                          
+                          <?php 
+                          foreach ($roles as $role) {
+                            echo "<option value=". $role .">". $role ."</option>";
+                          }
+                          ?>                                  
+                          </select>                          
+
+                          <label for="dropdown-user-status" class="control-label">Status:</label>              
+                          <select class="form-control" id="dropdown-user-status">                          
+                            <option value="A">Aktif</option>
+                            <option value="T">Tidak Aktif</option>                                              
+                          </select>                                                                                                                                           
+                        </td>
+                      </tr>
+                    </table> 
+                  </div>                                    
+                  <div class="modal-header" align="right">
+
+                  <button type="button" class="btn btn-default btn-sm" id="btnCetak"> <i class='fa fa-print'></i> &nbsp; Cetak</button>
+
+                    <button type="button" id="btnListUser" class="btn btn-default btn-sm" data-dismiss="modal"> <i class='fa fa-ban'></i> &nbsp; Tutup</button>
+                    <button type="reset" class="btn btn-default btn-sm"> <i class='fa fa-mail-reply'></i> &nbsp; Set Semula</button>  
+                    <button type="button" class="btn btn-default btn-sm" id="btnGenerateQrcode"> <i class='fa fa-qrcode'></i> &nbsp; Qrcode</button>              
+                    <button type="button" id="btnSaveUser" class="btn btn-primary btn-sm"> <i class='fa fa-check'></i> <span class="ui-button-text"> &nbsp; Simpan</span></button>
+
+                  </div>                                                                                                                                                                  
+            </div>
+           </form>
+
+
+    
+        </div>
+      </div>
+    </div>
+
+    <!-- form cetak akhir -->
+
+
+
+
+
+
 
     <div class="modal fade" id="removeUserModal" tabindex="-1" role="dialog" aria-labelledby="removeUserModal">
       <div class="modal-dialog" role="document">
