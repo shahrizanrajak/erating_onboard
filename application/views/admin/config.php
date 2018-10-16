@@ -21,7 +21,7 @@
   <body class="skin-red sidebar-mini">
     <div class="wrapper">
       <header class="main-header"> 
-        <!-- ERating operations aa-->                  
+        <!-- ERating operations -->                  
         <script src="<?php echo base_url(); ?>templates/js/dev/config.js" type="text/javascript"></script>   
         <script src="<?php echo base_url(); ?>templates/adminlte/plugins/datatables/buttons.flash.min.js" type="text/javascript"></script>  
         <script src="<?php echo base_url(); ?>templates/adminlte/plugins/datatables/jszip.min.js" type="text/javascript"></script>  
