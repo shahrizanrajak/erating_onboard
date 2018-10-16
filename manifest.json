@@ -1,0 +1,16 @@
+{
+  "short_name": "eRating",
+  "name": "eRating: Nilai Kunci Prestasi",
+  "icons": [
+    {
+      "src": "app-icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "density": 4.0
+    }
+  ],
+  "start_url": "/#/erating/index.php/user/login",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#1c1c1c"
+}

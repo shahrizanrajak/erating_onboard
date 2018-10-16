@@ -1,0 +1,75 @@
+DATABASE QUERY
+
+/* Check registered E-Rating who have reference Kementerian/Jabatan */
+
+// 1. List
+SELECT id, Agensi_ID, 
+kementerian.Kod_Kem, kementerian.Kementerian,
+jabatan.Kod_Jab,jabatan.Jabatan FROM setting_sistem
+LEFT JOIN jabatan ON jabatan.Kod_Jab = setting_sistem.Agensi_ID
+LEFT JOIN kementerian ON kementerian.Kod_Kem = setting_sistem.Agensi_ID
+
+// 1.a. List Details
+SELECT 
+setting_sistem.id, setting_sistem.Agensi_ID, 
+kementerian.Kod_Kem, kementerian.Kementerian,
+jabatan.Kod_Jab,jabatan.Jabatan,
+setting_sistem.`value`, setting_sistem.nama, setting_sistem.nama_eng, setting_sistem.smiley
+FROM setting_sistem
+LEFT JOIN jabatan ON jabatan.Kod_Jab = setting_sistem.Agensi_ID
+LEFT JOIN kementerian ON kementerian.Kod_Kem = setting_sistem.Agensi_ID
+
+// Select agency only 
+SELECT id, Agensi_ID, 
+kementerian.Kod_Kem, kementerian.Kementerian,
+jabatan.Kod_Jab,jabatan.Jabatan FROM setting_sistem
+LEFT JOIN jabatan ON jabatan.Kod_Jab = setting_sistem.Agensi_ID
+LEFT JOIN kementerian ON kementerian.Kod_Kem = setting_sistem.Agensi_ID
+WHERE kementerian.Kod_Kem IS NOT NULL OR jabatan.Kod_Jab IS NOT NULL
+
+// 2. Count
+SELECT COUNT(id) FROM setting_sistem
+LEFT JOIN jabatan ON jabatan.Kod_Jab = setting_sistem.Agensi_ID
+left JOIN kementerian ON kementerian.Kod_Kem = setting_sistem.Agensi_ID
+
+
+/* Rating that will have agency */
+
+// List details
+SELECT
+rating.id_rating,
+pengguna.agensi_id,
+rating.id_pengguna, 
+rating.tarikh, 
+rating.masa,
+rating.rating,
+rating.soalan
+FROM rating
+INNER JOIN pengguna ON pengguna.id_pengguna = rating.id_pengguna
+
+// count by years that will have agency
+SELECT year(rating.tarikh), COUNT(rating.id_rating) 
+FROM rating
+INNER JOIN pengguna ON pengguna.id_pengguna = rating.id_pengguna
+GROUP BY YEAR(rating.tarikh)
+
+2014	126
+2015	230507
+2016	339070s
+
+
+
+select `rateit`.`agency_id` AS `agency_id`,month(`rateit`.`date_update`) AS `month`,count(`rateit`.`picked`) AS `total` from ((((`rateit` left join `kementerian` on((`kementerian`.`Kod_Kem` = left(`rateit`.`agency_id`,3)))) left join `jabatan` on((`jabatan`.`Kod_Jab` = left(`rateit`.`agency_id`,6)))) left join `cawangan` on((`cawangan`.`Kod_Caw` = left(`rateit`.`agency_id`,9)))) left join `konfigurasi` on((`konfigurasi`.`Kod_Bah` = `rateit`.`agency_id`))) where (year(`rateit`.`date_update`) = year(curdate())) group by month(`rateit`.`date_update`),`rateit`.`agency_id` order by month(`rateit`.`date_update`) limit 0,30
+
+select `rateit`.`agency_id` AS `agency_id`,
+month(`rateit`.`date_update`) AS `month`,
+count(`rateit`.`picked`) AS `total` 
+from ((((`rateit` 
+left join `kementerian` on((`kementerian`.`Kod_Kem` = left(`rateit`.`agency_id`,3)))) 
+left join `jabatan` on((`jabatan`.`Kod_Jab` = left(`rateit`.`agency_id`,6)))) 
+left join `cawangan` on((`cawangan`.`Kod_Caw` = left(`rateit`.`agency_id`,9)))) 
+left join `konfigurasi` on((`konfigurasi`.`Kod_Bah` = `rateit`.`agency_id`))) 
+where (year(`rateit`.`date_update`) = year(curdate())) 
+group by
+month(`rateit`.`date_update`),
+`rateit`.`agency_id`
