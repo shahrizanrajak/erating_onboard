@@ -1,1 +1,1 @@
-<meta http-equiv="refresh" content="0; url= http://localhost/" />
+<meta http-equiv="refresh" content="0; url= http://test-erating-dev.apps.osdec.gov.my/" />

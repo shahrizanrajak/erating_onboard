@@ -88,9 +88,9 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
+	'hostname' => 'mysql',
 	'username' => 'root',
-	'password' => 'root',
+	'password' => 'BPiKmuj4vVCwMSKm',
 	'database' => 'erating',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
