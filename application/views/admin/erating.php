@@ -148,7 +148,7 @@
         <center><p><?php echo $this->session->userdata('email'); ?></p></center>
         </h1>
           <h1>
-            Tetapan Antaramukaed
+            Tetapan Antaramuka
             <small>Mengikut agensi berdaftar</small>
           </h1>          
           <ol class="breadcrumb">
