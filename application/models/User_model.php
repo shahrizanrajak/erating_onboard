@@ -1,22 +1,22 @@
 <?php
 class User_model extends CI_Model {
 
-	public function __construct()
-	{
-		$this->load->database();
+    public function __construct()
+    {
+        $this->load->database();
         
         // $this->agency = substr($this->session->userdata('agency'), 0, 3);  // get main agency ID        
-	}
+    }
 
-	public function list_all()
-	{
-		$this->db->cache_off();
+    public function list_all()
+    {
+        $this->db->cache_off();
         $this->db->select('id_pengguna, nama, agensi_id');
-		$this->db->from('pengguna');
-		$query = $this->db->get();		
+        $this->db->from('pengguna');
+        $query = $this->db->get();      
 
-		return $query->result_array();
-	}	
+        return $query->result_array();
+    }   
 
     public function list_by_agency($id = NULL)
     {
@@ -56,30 +56,22 @@ class User_model extends CI_Model {
         return $query->result_array();
     } 
 
-	public function validate($data)
-	{		
+    public function validate($data)
+    {       
         // $query = $this->db->get_where('user', array('email' => $data['email'], 'password' => $data['password']));
         if ($data) 
         {
             $this->db->cache_off();
-            if (($data['loginname'] == '') || ($data['password']==''))
+            // kalau password @ username kosong balik ke login page
+             if (($data['loginname'] == '') || ($data['password']==''))
             {
                 return false;
             }
-            $query = $this->db->get_where('pengguna',  array('kad_pengenalan' => $data['loginname'], 'kata_laluan' => $data['password'], 'status' => 'A'));
 
-          	$result = $query->row_array();
-
-
-            // $this->db->cache_off();
-            // $this->db->select('pengguna.tahap, jabatan.Jabatan, jabatan.Kod_Jab');
-            // $this->db->from('pengguna');
-            // $this->db->join('jabatan', 'jabatan.Kod_Jab = pengguna.agensi_id', 'left'); 
-            // $this->db->where('kad_pengenalan',$data['loginname']);  
-            // $this->db->where('kata_laluan', $data['password']);  
-            // $this->db->where('pengguna.status', 'A');
-            // $query = $this->db->get(); 
-            // $result = $query->result_array();
+            // end
+            
+            $query = $this->db->get_where('pengguna', array('kad_pengenalan' => $data['loginname'], 'kata_laluan' => $data['password'], 'status' => 'A'));      
+            $result = $query->row_array();
 
             if ($result) {        
                 // Update user log - login
@@ -92,10 +84,10 @@ class User_model extends CI_Model {
         } else {
             return false;
         }
-	}
+    }
 
-	public function save($data)
-	{
+    public function save($data)
+    {
         $items = null; 
         $values = null;
         // $sessionid = md5(uniqid(rand()));
@@ -104,7 +96,7 @@ class User_model extends CI_Model {
         foreach($data as $key => $value) {
             $items  .= "". $key .",";
             $values .= "'". $value ."',";
-        }		
+        }       
 
         // $items .= "session_id,";
         // $values .= "'". $passkey ."',";
@@ -117,16 +109,16 @@ class User_model extends CI_Model {
  
         if ($findIc = self::find_user_by_ic($getIc)) 
         {
-        	// return 5;
+            // return 5;
             throw new Exception('duplicate IC found');            
             return false;            
         } 
         else 
         {
-	        $result = $this->db->query("INSERT INTO pengguna (".$qitems.") VALUES (".$qvalues.")");  	        
+            $result = $this->db->query("INSERT INTO pengguna (".$qitems.") VALUES (".$qvalues.")");             
             return $result;
         }                       
-	}
+    }
 
     public function update($data)
     {
@@ -161,8 +153,8 @@ class User_model extends CI_Model {
         return $result;     
     }       
 
-	public function find_user($id = NULL)
-	{           
+    public function find_user($id = NULL)
+    {           
         $this->db->cache_off();
         $this->db->select('*');
         $this->db->from('pengguna');   
@@ -170,7 +162,7 @@ class User_model extends CI_Model {
         $query = $this->db->get();
        
         return $query->row_array();     
-	}	
+    }   
 
     public function find_user_with_photo($id = NULL)
     {           
@@ -329,7 +321,7 @@ class User_model extends CI_Model {
         }    
     }
 
-    public function save_rate_mobile($agency, $user, $picked, $qr='qr', $soalan)
+   public function save_rate_mobile($agency, $user, $picked, $qr='qr', $soalan)
     {
         $items = null; $values = null;     
         $sessionid = md5(uniqid(rand()));   

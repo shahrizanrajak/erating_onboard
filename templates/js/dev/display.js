@@ -32,7 +32,7 @@ $(document).ready(function()
           //setRating(smiley, qselect);
           console.log('No response for 3 sec.. timeout');
           $('#mdSelectReason').modal('hide');
-        }, 2000);       
+        }, 5000);       
 
       setRating(smiley, qselect);
     });  
@@ -60,7 +60,7 @@ $(document).ready(function()
               $('#mdSelectReason').modal('hide');     
               $('#mdShowThanks').modal('show');
               
-              setTimeout(function(){ $('#mdShowThanks').modal('hide') }, 2000);    
+              setTimeout(function(){ $('#mdShowThanks').modal('hide') }, 5000);    
             },
             error: function () {                     
                 alert('Unable to connect to the server..');

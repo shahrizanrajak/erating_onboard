@@ -16,12 +16,13 @@ class Config_model extends CI_Model {
         // Delete all Cache
         // $this->db->cache_delete_all();       
         $this->role = $this->session->userdata('role');  
-        // $this->agency = substr($this->session->userdata('agency'), 0, 6);  // get main agency ID
-        $this->agency = $this->session->userdata('agency');  // get main agency ID        
+        $this->agency = $this->session->userdata('agency');  // get main agency ID
+        //echo $this->session->userdata('agency');
 	}
 
+// Copy dan paste sistem di Production 31-10-2017
 	public function list_all()
-	{        
+    {        
         $stmt = "SELECT 
             Kod_Erating AS record_id, 
             Kod_Bah AS code_branch, 
@@ -38,13 +39,9 @@ class Config_model extends CI_Model {
 
         // Filter by User Roles
         if ($this->role == 'Pentadbir') {
-            // Read user credentials by Agency Id length. Format XXXYYYZZZ; X-Ministry Y-Department Z-Branch
-            // if Id is XXXYYY (length 6 chars), user Role is Pentadbir else is Pengguna
-            if (strlen($this->agency) == 6) 
-                // Pentadbir
+            if (strlen($this->agency) == 6)
                 $stmt .= " WHERE Kod_Bah LIKE '". $this->agency ."%'";
             else
-                // Penyelia
                 $stmt .= " WHERE Kod_Bah LIKE '". $this->agency ."'";          
         }
 
@@ -54,8 +51,8 @@ class Config_model extends CI_Model {
         $query = $this->db->query($stmt);   
         $result = $query->result_array();
 
-		return $result;
-	}
+        return $result;
+    }
 
     public function list_filter($id)
     {
@@ -96,8 +93,9 @@ class Config_model extends CI_Model {
 
         // echo $this->db->last_query();    //print last query
         return $query->result_array();
-    }    	
-
+    }
+// Copy dan paste sistem di Production 31-10-2017 end 
+    
 	public function view_header($id)
 	{
         $this->db->cache_off();

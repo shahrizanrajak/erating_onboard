@@ -23,9 +23,7 @@ class Smiley_model extends CI_Model {
 		$this->db->from('smiley');
 		$this->db->where('Status', 'A');  
 		$this->db->order_by('Order', 'ASC'); 
-		$query = $this->db->get();	
-
-		// echo $this->db->last_query(); 	
+		$query = $this->db->get();		
 
 		return $query->result_array();            
 	}	

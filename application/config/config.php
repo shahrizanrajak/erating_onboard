@@ -24,7 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 // $config['base_url'] = '';
-$config['base_url'] = 'http://test-erating-dev.apps.osdec.gov.my/';
+$config['base_url'] = 'http://erating2.mampu.gov.my/';
 
 /*
 |--------------------------------------------------------------------------
@@ -356,7 +356,7 @@ $config['encryption_key'] = '';
 |
 | 'sess_time_to_update'
 |
-|	How many seconds between CI regenerating the session ID.
+|	How many seconds between CI regen the session ID.
 |
 | 'sess_regenerate_destroy'
 |

@@ -18,17 +18,17 @@
   |               | sidebar-mini                            |
   |---------------------------------------------------------|
   -->
-  <body class="skin-red sidebar-mini">
+  <body class="skin-blue sidebar-mini">
     <div class="wrapper">
       <header class="main-header">
         <!-- ERating operations -->
-        <script src="<?php echo base_url(); ?>templates/js/dev/erating.js" type="text/javascript"></script>
+        <script src="<?php echo base_url(); ?>templates/js/erating.js" type="text/javascript"></script>  
         <!-- Logo -->
-        <a href="<?php echo base_url(); ?>index.php/coor-dashboard" class="logo">
+        <a href="index2.html" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <span class="logo-mini">+</span>
           <!-- logo for regular state and mobile devices -->
-          <span class="logo-lg"><b>e</b>RATING</span>
+          <span class="logo-lg"><b>e-</b>RATING</span>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
@@ -59,7 +59,7 @@
                   <!-- Menu Footer-->
                   <li class="user-footer">
                     <div class="pull-left">
-                      <a href="<?php echo base_url(); ?>index.php/coor-user" class="btn btn-default btn-flat">Profile</a>
+                      <a href="#" class="btn btn-default btn-flat">Profile</a>
                     </div>
                     <div class="pull-right">
                       <a href="<?php echo base_url(); ?>index.php/logout" class="btn btn-default btn-flat">Sign out</a>
@@ -87,56 +87,40 @@
             </div>
           </div>
           <!-- search form -->
-         <!--  <form action="#" method="get" class="sidebar-form">
+          <form action="#" method="get" class="sidebar-form">
             <div class="input-group">
               <input type="text" name="q" class="form-control" placeholder="Search..." />
               <span class="input-group-btn">
                 <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
               </span>
             </div>
-          </form> -->
+          </form>
           <!-- /.search form -->
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
-            <li class="header">MAIN NAVIGATION</li>
-            <li>
-              <a href="<?php echo base_url(); ?>index.php/coor-dashboard">
+            <li class="header">MENU UTAMA</li>
+            <li class="treeview">
+              <a href="<?php echo base_url(); ?>index.php/user-dashboard">
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
               </a>
-            </li>
+            </li> 
             <li class="treeview">
-              <a href="<?php echo base_url(); ?>index.php/coor-erating-list">
-                <i class="fa fa-th"></i>
-                <span>Tetapan E-Rating</span>                
-              </a>
-            </li>    
-            <li class="treeview">
-              <a href="#">
-                <i class="fa fa-cog"></i>
-                <span>Tetapan Sistem</span>
-                <!-- https://editor.datatables.net/examples/simple/simple -->
-                <!-- https://editor.datatables.net/examples/inline-editing/simple.html -->
-                <!-- https://editor.datatables.net/examples/bubble-editing/inTableControls.html# -->
-                <!-- <i class="fa fa-angle-left pull-right"></i> -->
-              </a>
-             <!--  <ul class="treeview-menu">
-                <li><a href="<?php echo base_url(); ?>index.php/config-ministry"><i class="fa fa-circle-o"></i> Kementerian</a></li>
-                <li><a href="<?php echo base_url(); ?>index.php/config-department"><i class="fa fa-circle-o"></i> Jabatan</a></li>
-                <li><a href="<?php echo base_url(); ?>index.php/config-erating"><i class="fa fa-circle-o"></i> Pilihan Rating</a></li>
-                <li><a href="<?php echo base_url(); ?>index.php/config-question"><i class="fa fa-circle-o"></i> Soalan Penilaian</a></li>
-              </ul> -->
-            </li>                      
-            <li>
-              <a href="<?php echo base_url(); ?>index.php/coor-report">
+              <a href="<?php echo base_url(); ?>index.php/user-report">
                 <i class="fa fa-bar-chart"></i>
                 <span>Laporan</span>                
               </a>
             </li> 
-            <li class="active">
-              <a href="<?php echo base_url(); ?>index.php/coor-user">
-                <i class="fa fa-user"></i> <span>Maklumat Diri</span>
+            <li class="treeview active">
+              <a href="<?php echo base_url(); ?>index.php/user-user">
+                <i class="fa fa-user"></i>
+                <span>Maklumat Diri</span>                
               </a>
-            </li>                        
+            </li>          
+            <li class="treeview">
+              <a href="<?php echo base_url(); ?>index.php/display/<?php echo $this->session->userdata('agency');?>">
+                <i class="fa fa-smile-o"></i> <span>Paparan</span>
+              </a>
+            </li>
           </ul>
         </section>
         <!-- /.sidebar -->
@@ -196,7 +180,7 @@
                           <input type="text" class="form-control" id="user-name" placeholder="Nama Penuh"> 
                           <label for="user-ic" class="control-label">No Kad Pengenalan:</label>                        
                           <input type="text" class="form-control" id="user-ic" placeholder="No Kad Pengenalan"> 
-                          <!-- <label for="user-login" class="control-label">Nama Login:</label>        
+<!--                           <label for="user-login" class="control-label">Nama Login:</label>        
                           <input type="text" class="form-control" id="user-login" placeholder="Nama Login">  -->
                           <label for="user-pwd" class="control-label">Kata Laluan:</label> 
                           <input type="text" class="form-control" id="user-pwd" placeholder="Kata Laluan">       
@@ -209,12 +193,11 @@
 
                           <label for="udropdown-user-access" class="control-label">Capaian:</label>              
                           <select class="form-control" id="dropdown-user-access">                          
-                          <?php 
-                          foreach ($roles as $role) {
-                            echo "<option>". $role ."</option>";
-                          }
-                          ?>                                  
-                          </select>    
+                            <option value="Pentadbir Utama">Pentadbir Utama</option>
+                            <option value="Pentadbir">Pentadbir</option>                                              
+                            <option value="Pengguna">Pengguna</option>                                              
+                            <option value="Kaunter">Kaunter</option>                                              
+                          </select>   
                           
                           <label for="dropdown-user-status" class="control-label">Status:</label>              
                           <select class="form-control" id="dropdown-user-status">                          
@@ -247,7 +230,7 @@
         <div class="pull-right hidden-xs">
           <b>Version</b> 1.0
         </div>
-        <strong>Copyright &copy; 2016 <a href="<?php echo base_url(); ?>index.php/dashboard">E-Rating Development Team</a>.</strong> All rights reserved.
+        <strong>Copyright &copy; 2016 <a href="<?php echo mydomain; ?>">E-Rating Development Team</a>.</strong> All rights reserved.
       </footer>
 
       <!-- Control Sidebar -->
@@ -274,31 +257,29 @@
       });
     </script>
     <script type="text/javascript">
-          var domain = $('#domain').val();
           var uId = $('#userId').val();          
           var modal = $(this);     
-          var noimage = domain+'/templates/images/noimage.png';         
+          var noimage = domain+'/templates/images/noimage.png';        
 
           // get details User record from server       
           $.ajax({
               type: "GET",
               datatype: "jsonp",                            
-              url: domain+"index.php/user-details/"+uId,
+              url: "/index.php/user-details/"+uId,
               // data: {data: jsonData},                                                                 
               success: function(data) {
                   console.log('User Details: ' + data); 
                   JsonEratingData = jQuery.parseJSON(data); //JSON.stringify(data);  
 
                   if (JsonEratingData) {                  
-                    $('#user-name').val(JsonEratingData.nama);
-                    $('#user-ic').val(JsonEratingData.kad_pengenalan).attr('disabled','disabled');   
-                    $('#user-login').val(JsonEratingData.nama_pengguna);                                       
-                    $('#user-pwd').val(JsonEratingData.kata_laluan);
-                    $('#user-post').val(JsonEratingData.jawatan);                    
-                    $('#user-email').val(JsonEratingData.emel);
-                    $('#user-phone').val(JsonEratingData.no_telefon);                  
-                    $('#dropdown-user-access').val(JsonEratingData.tahap);                    
-                    $('#dropdown-user-status').val(JsonEratingData.status); 
+                    $('#user-name').val(JsonEratingData.uname);
+                    $('#user-ic').val(JsonEratingData.uic).attr('disabled','disabled');                                        
+                    $('#user-pwd').val(JsonEratingData.upwd);
+                    $('#user-post').val(JsonEratingData.upost);                    
+                    $('#user-email').val(JsonEratingData.uemail);
+                    $('#user-phone').val(JsonEratingData.uphone);                  
+                    $('#dropdown-user-access').val(JsonEratingData.uaccess);                    
+                    $('#dropdown-user-status').val(JsonEratingData.ustatus); 
 
                     // Load profile picture
                     $('#preview-photo').attr('width', '100px');

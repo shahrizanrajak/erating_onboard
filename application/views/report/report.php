@@ -84,7 +84,7 @@
           <!-- /.search form -->
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
-            <li class="header">MAIN NAVIGATION</li>
+            <li class="header">MENU UTAMA</li>
             <li>
               <a href="<?php echo base_url(); ?>index.php/dashboard">
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
@@ -122,9 +122,6 @@
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-         <h1>
-        <center><p><?php echo $this->session->userdata('email'); ?></p></center>
-        </h1>
           <h1>
             Laporan
             <small>Data eRating</small>
@@ -280,7 +277,7 @@
                               <th width="15%">Bahagian</br></th>
                               <th width="5%">Tidak Memuaskan</br></th>                                                      
                               <th width="5%">Kurang Memuaskan</br></th>                                                      
-                              <th width="5%">Sederhana Memuaskan</br></th>                                                   
+                              <th width="5%">Sederhana Memuaskan</br></th>                                                      
                               <th width="5%">Memuaskan</br></th>                                                      
                               <th width="5%">Cemerlang</br></th>                                                      
                               <th width="10%">Jumlah</br></th>                                                      

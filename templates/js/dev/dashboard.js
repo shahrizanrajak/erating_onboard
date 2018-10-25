@@ -5,15 +5,15 @@ $(document).ready(function()
 
     setInterval( function () {
 
-           $.ajax({
-              type: "GET",
-              datatype: "jsonp",                            
-              url: domain+"index.php/api/dashboard_total_agency",                                                                            
-              success: function(data) {                       
-                $('#txtTotalAgencyActive').text(data);
-               // console.log('getData: '+ data);
-              }
-          });      
+          //  $.ajax({
+          //     type: "GET",
+          //     datatype: "jsonp",                            
+          //     url: domain+"index.php/api/dashboard_total_active",                                                                            
+          //     success: function(data) {                       
+          //       $('#txtTotalAgencyActive').text(data);
+          //      // console.log('getData: '+ data);
+          //     }
+          // });      
 
 
           $.ajax({

@@ -70,7 +70,7 @@ $(document).ready(function()
     }).then(function(result) {        
 
       console.log(result);
-        
+      
       $(".page-result").hide(); 
       $(".page-counter").show(); 
       $("#counter").html("");
@@ -86,18 +86,18 @@ $(document).ready(function()
           //   '</li>'; 
 
           htmlStr += '<li id="'+ v.id_pengguna +'" class="w3-bar">'+
-            '<span onclick="this.parentElement.style.display=none" class="w3-bar-item w3-button w3-white w3-xlarge w3-right">'+
-            '<span class="glyphicon glyphicons-chevron-right"></span>&nbsp;</span>'+
+          '<span onclick="this.parentElement.style.display=none" class="w3-bar-item w3-button w3-white w3-xlarge w3-right">'+
+          '<span class="glyphicon glyphicons-chevron-right"></span>&nbsp;</span>'+
             // '<img src="'+v.photo + '" class="w3-bar-item w3-circle w3-hide-small" style="width:85px">'+
             '<img src="'+v.photo + '" class="w3-bar-item w3-circle " style="width:100px">'+
             '<div class="w3-bar-item">'+
             '  <span class="w3-large">No Kaunter:' +v.id_pengguna + '</span><br>'+
             '  <span style="font-size:14px;">' + v.nama.substr(0,20) + '</span>'+
             '</div>'+
-          '</li> ';  
+            '</li> ';  
 
           // htmlStr += '<li id="'+ v.id_pengguna +'" class="w3-bar">"'+ v.nama +'"</li> ';             
-      });
+        });
 
       console.log("list format:"+ htmlStr);
       // $("#counter").append(htmlStr);
@@ -124,14 +124,14 @@ $(document).ready(function()
 
      console.log('Id Agensi:'+ agency +' Id Kaunter:'+ id);
 
-    $.ajax({
+     $.ajax({
       url: root + '/index.php/mobile/get_rating/'+id,
       method: 'GET'
       // type: 'GET',
       // dataType: 'jsonp'      
     }).then(function(result) {        
       console.log(result);
-        
+      
       $(".page-counter").hide();  
       $(".page-rating").show(); 
       $("#counter_image").attr("src",result.photo);
@@ -157,7 +157,7 @@ $(document).ready(function()
   //   //   // dataType: 'jsonp'      
   //   // }).then(function(result) {        
   //   //   console.log(result);
-        
+  
   //   //   $(".page-counter").hide();  
   //   //   $(".page-rating").show(); 
   //   //   $("#counter_image").attr("src",result.photo);
@@ -169,32 +169,37 @@ $(document).ready(function()
   // });
 
   $("#btnRate").click(function(){
-      var agency = $('#agency_id').val();
-      var counter = $('#counter_id').val();
-      var smiley = $('input[name=rating]').val();
-      var qselect =  $('#soalan').val();
-    
+    var agency = $('#agency_id').val();
+    var counter = $('#counter_id').val();
+    var smiley = $('input[name=rating]').val();
+    var qselect =  $('#soalan').val();
+      // if (smiley < 3)
+      // {
+      //   if (qselect == '')
+      //   {
+      //     alert ("Sila Pilih sebab"); 
+      //     return false;
+      //   }
+      // }
+
 
       if (smiley =="undefined")
-        {
-        alert ("Sila pilih smiley"); 
-              return false;
-            }
+      {
+        alert ("Sila Pilih Smiley"); 
+        return false;
+      }
        // qselect =  $('#soalan').val();
-          if (smiley < 3 )
-          {
-            if (qselect == '')
-            {
-              alert ("Sila Pilih sebab"); 
-              return false;
-            }
-          }
-
-
+       if (smiley < 3 )
+       {
+        if (qselect == '')
+        {
+          alert ("Sila Pilih sebab"); 
+          return false;
+        }
+      }
       else var qselect = 0
 
-
-      var jsonData = '{"agency_id":"'+ agency +'","user_id":"'+ counter +'","picked":"'+ smiley +'","reason":"'+ qselect +'"}';
+        var jsonData = '{"agency_id":"'+ agency +'","user_id":"'+ counter +'","picked":"'+ smiley +'","reason":"'+ qselect +'"}';
 
       console.log('Data Sent:' +jsonData);
 
@@ -202,9 +207,9 @@ $(document).ready(function()
           // type: "POST", 
           type: "GET", 
           // dataType: "jsonp",
-          url: "http://localhost/erating/index.php/mobile/rateit/"+agency+"/"+counter+"/"+smiley+"/"+qselect,                                               
+          url: "/index.php/mobile/rateit/"+agency+"/"+counter+"/"+smiley+"/"+qselect,                                               
           // data: {data: jsonData},              
-            success: function(data) {                          
+          success: function(data) {                          
               // $("#popup-thanks").popup("open"); 
               // setTimeout(function(){  $("#popup-thanks").popup("close"); }, 3000);
               $(".page-rating").hide(); 
@@ -214,12 +219,12 @@ $(document).ready(function()
               //$(".page-thanks").show();    
             },
             error: function () {                     
-                alert("http://localhost/erating/index.php/mobile/rateit/"+agency+"/"+counter+"/"+smiley);
+              alert("/index.php/mobile/rateit/"+agency+"/"+counter+"/"+smiley);
                 // alert("lalala");
                     // window.location = 'page_Asemakan.html';                                         
-            }
-      });
-  });  
+                  }
+                });
+    });  
 }); 
 
 // $('input[name=rating]').click(function() {
@@ -227,11 +232,11 @@ $(document).ready(function()
 // });
 
 $('input[name=rating]').click(function(){
-    console.log('Counter id:'+ $(this).attr('id'));
-  });
+  console.log('Counter id:'+ $(this).attr('id'));
+});
 
 function semak(count){
-    var namasmiley = ["", "Tidak Memuaskan", "Kurang Memuaskan", "Sederhana Memuaskan", "Memuaskan", "Cemerlang"];
+  var namasmiley = ["", "Tidak Memuaskan", "Kurang Memuaskan", "Sederhana Memuaskan", "Memuaskan", "Cemerlang"];
   $('#ratingname').text(namasmiley[count]);
   // alert(count);
   if(count < 3){

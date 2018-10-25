@@ -13,7 +13,7 @@
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <span class="logo-mini">+</span>
           <!-- logo for regular state and mobile devices -->
-          <span class="logo-lg"><b>e-</b>Rating</span>
+          <span class="logo-lg"><b>e-</b>RATING</span>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
@@ -70,7 +70,7 @@
               <img src="<?php echo $avatar; ?>" class="img-circle" alt="User Image" />
             </div>
             <div class="pull-left info">
-              <p><?php echo $this->session->userdata('role'); ?></p>   
+              <p><?php echo $this->session->userdata('logged_user'); ?></p>   
               <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
           </div>
@@ -86,7 +86,7 @@
           <!-- /.search form -->
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
-            <li class="header">MAIN NAVIGATION</li>
+            <li class="header">MENU UTAMA</li>
             <li class="treeview active">
               <a href="<?php echo base_url(); ?>index.php/dashboard">
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
@@ -123,32 +123,8 @@
       <div class="content-wrapper">        
         <!-- Content Header (Page header) -->
         <section class="content-header">
-        <h1>
-        <!-- <center><p><?php echo $this->session->userdata('email'); ?></p></center>
-        <center><p><?php echo $this->session->userdata('login_key'); ?></p></center>
-        <center><p><?php echo $this->session->userdata('logged_id'); ?></p></center>
-        <center><p><?php echo $this->session->userdata('logged_ic'); ?></p></center> -->
-       <!--  <center><p><?php echo $this->session->userdata('logged_user'); ?></p></center> -->
-        <!-- <center><p><?php echo $this->session->userdata('role'); ?></p></center> -->
-        <center><p>
-        <?php 
-        $kodAgensi = $this->session->userdata('agency');
-        // $namaMinistry = $this->Department_model->find_agency_by_id($kodAgensi)['ministry'];
-        // $namaJabatan = $this->Department_model->find_agency_by_id($kodAgensi)['department'];
-        // $namaCawangan = $this->Department_model->find_agency_by_id($kodAgensi)['branch'];
-
-        // if ($namaCawangan != '' ) echo $namaCawangan;
-        // elseif ($namaJabatan != '') echo $namaJabatan;
-        // else echo $namaMinistry;
-
-        ?></p></center>
-        <!-- <center><p><?php echo $this->session->userdata('1'); ?></p></center> -->
-        <!-- <h6><?php echo $agency_data['branch']; ?></h6> -->
-       
-
-        </h1>
           <h1>
-            Dashboard 
+            Dashboard
             <small>Statistik <?php //echo mydomain; ?></small>
           </h1>
           <ol class="breadcrumb">

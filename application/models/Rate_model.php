@@ -6,9 +6,9 @@ class Rate_model extends CI_Model {
     // http://stackoverflow.com/questions/14834290/mysql-query-to-dynamically-convert-rows-to-columns
     // http://sqlfiddle.com/#!2/70129/13
 
-	public function __construct()
-	{
-		// date_default_timezone_set("Asia/Kuala_Lumpur");
+    public function __construct()
+    {
+        // date_default_timezone_set("Asia/Kuala_Lumpur");
         // echo date_default_timezone_get();
         // ini_set("date.timezone", "Asia/Kuala_Lumpur");
         
@@ -16,14 +16,13 @@ class Rate_model extends CI_Model {
         $this->role = $this->session->userdata('role');  
         $this->agency = substr($this->session->userdata('agency'), 0, 6);  // get main agency ID
         
-        $this->year = "2018";        
-        // $this->year = date("Y");  
         
-        //$this->today = '2016-01-18';
-        $this->today = date("Y-m-d");        
+        $this->today = date("Y-m-d");
+        $this->year = "2018";
+        $this->year = date("Y");       
         
         // echo $this->today;            
-	}
+    }
 
     public function list_filter($id, $start, $end, $petugas)
     {
@@ -648,7 +647,7 @@ class Rate_model extends CI_Model {
         return $query->row_array();     
     }         
 
-    public function stats_total_rating()
+       public function stats_total_rating()
     {        
         $this->db->cache_off();
         // $query = $this->db->query("SELECT * FROM rateit WHERE Year(date_update) = YEAR(CURDATE())");
@@ -656,7 +655,7 @@ class Rate_model extends CI_Model {
 
         $this->db->select('COUNT(rate_id)');
         $this->db->from('rateit');
-        $this->db->where('Year(date_update)', $this->year);
+        $this->db->where('Date(date_update)', $this->today);
 
         // Filter by User Roles
         if ($this->role == 'Pentadbir') {
@@ -669,9 +668,9 @@ class Rate_model extends CI_Model {
         // echo $this->db->last_query();    //print last query
 
         return  $result;           
-    }          
+    } 
 
-    public function stats_total_comment()
+     public function stats_total_comment()
     {        
         $this->db->cache_off();
         // $query = $this->db->query("SELECT * FROM rateit WHERE picked <= 2 AND Year(date_update) = YEAR(CURDATE())");
@@ -680,7 +679,8 @@ class Rate_model extends CI_Model {
         $this->db->select('COUNT(rate_id)');
         $this->db->from('rateit');
         $this->db->where('picked <=', 2);
-        $this->db->where('Year(date_update)', $this->year);
+        // $this->db->where('Year(date_update)', $this->year);
+        $this->db->where('Date(date_update)', $this->today);
 
         // Filter by User Roles
         if ($this->role == 'Pentadbir') {
@@ -694,6 +694,6 @@ class Rate_model extends CI_Model {
         // echo $this->db->last_query();    //print last query
 
         return  $result;              
-    }              	
+    }               
 }
 

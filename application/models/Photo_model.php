@@ -64,7 +64,6 @@ class Photo_model extends CI_Model {
         // echo $this->db->last_query(); 
         return $query->result_array();      
     }
-
     // public function get_photo_smiley($id = NULL)
     // {           
     //     $this->db->cache_off();

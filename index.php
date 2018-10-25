@@ -53,7 +53,7 @@
  *
  * NOTE: If you change these, also change the error_reporting() code below
  */
-	define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
+	define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'production');
 
 /*
  *---------------------------------------------------------------
@@ -66,14 +66,14 @@
 switch (ENVIRONMENT)
 {
 	case 'development':
-		define('mydomain', '/');
+		define('mydomain', 'http://erating2.mampu.gov.my/');
 		error_reporting(-1);
 		ini_set('display_errors', 1);
 	break;
 
 	case 'testing':
 	case 'production':
-		define('mydomain', '/');
+		define('mydomain', 'http://erating2.mampu.gov.my/');
 		ini_set('display_errors', 0);
 		if (version_compare(PHP_VERSION, '5.3', '>='))
 		{

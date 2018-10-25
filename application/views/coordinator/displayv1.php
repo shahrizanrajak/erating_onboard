@@ -111,10 +111,8 @@
           </tr>          
           <tr>
             <td align="center">
-              <h6><?php echo $agency_data['branch']; ?></h6>
-              <h6><?php echo $agency_data['department']; ?></h6>
-              <h6><?php echo $agency_data['ministry']; ?></h6>
-              <!-- <button id="btnDashboard" type="button" class="btn btn-primary">Dashboard</button> -->
+<!--               <h6><?php echo $agency_data['department']; ?></h6>
+              <button id="btnDashboard" type="button" class="btn btn-primary">Dashboard</button> -->
             </td>
           </tr>
         </table> 

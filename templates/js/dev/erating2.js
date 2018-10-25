@@ -459,7 +459,8 @@
           } else {
             jsonData = '{"id_pengguna":"'+ uId +'","kad_pengenalan":"'+ setIc +'","kata_laluan":"'+ setPwd +'","nama":"'+ setName +'","jawatan":"'+ setPost +'","emel":"'+ setEmail +'","no_telefon":"'+ setPhone +'","tahap":"'+ setAccess +'","status":"'+ setStatus +'","agensi_id":"'+ setAgencyId +'"}';
             jsonCall = domain+"index.php/user-update";
-            actions = '<a href="#" class="user_preview" id="'+ uId+'">Lihat</a> / <a href="" class="user_remove" id="'+ uId+'">Padam</a>';
+            // actions = '<a href="#" class="user_preview" id="'+ uId+'">Lihat</a> / <a href="" class="user_remove" id="'+ uId+'">Padam</a>';
+			actions = '<a href="#" class="user_preview" id="'+ uId+'">Lihat</a> / Padam';
           }
 
           $.ajax({    
@@ -622,7 +623,7 @@
                         result.push(item.jawatan);
                         // result.push(item.upost);
                         result.push(item.tahap);                        
-                        result.push('<a href="#" class="user_preview" id="'+ item.id_pengguna +'">Lihat</a> / <a href="#" class="user_remove" id="'+ item.id_pengguna +'">Padam</a>');
+                        result.push('<a href="#" class="user_preview" id="'+ item.id_pengguna +'">Lihat</a>  <a href="#" class="user_remove" id="'+ item.id_pengguna +'"></a>');
                         return result;
                     });
                     tblListUser.rows.add(result);

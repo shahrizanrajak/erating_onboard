@@ -9,10 +9,6 @@ class Qr_code_generate extends CI_Controller
     {
         parent::__construct();
         // $this->load->model('user_model', 'user');
-
-        
-
-        
         $this->load->model('user_model');
         $this->load->library('ci_qr_code');
         $this->config->load('qr_code');
@@ -48,10 +44,11 @@ class Qr_code_generate extends CI_Controller
         $data['user']=$this->user_model->find_user_with_photo($user_id);
        // var_dump($data); exit;
         $this->load->view('pdf_kaunter3',$data);
+    }
 
-
-
-
+    function root_url()
+    {
+      return $_SERVER['HTTP_HOST'] . '/';
     }
     function print_qr($user_id)
     {
@@ -67,6 +64,8 @@ class Qr_code_generate extends CI_Controller
         $qr_code_config['black'] = $this->config->item('black');
         $qr_code_config['white'] = $this->config->item('white');
         $this->ci_qr_code->initialize($qr_code_config);
+    
+        // mkdir($qr_code_config['imagedir'] . 'test');
 
         // get full name and user details
         $user_details = $this->user_model->find_user($user_id);
@@ -84,13 +83,15 @@ class Qr_code_generate extends CI_Controller
         // $codeContents .= "user_email :";
         // $codeContents .= $user_details['emel'];
 
-        $codeContents = '<?php echo base_url(); ?>index.php/erating/mobile/'.$user_details['id_pengguna'];        
+        // $rootUrl = 'http://erating2.mampu.gov.my/';
+        $codeContents = $this->config->item(base_url) . 'index.php/mobile/' . $user_details['id_pengguna'];   
+        // mkdir($qr_code_config['imagedir'] . $user_details['id_pengguna']);     
 
         $params['data'] = $codeContents;
         $params['level'] = 'H';
         $params['size'] = 50;
 
-        $params['savename'] = FCPATH . $qr_code_config['imagedir'] . $image_name;     
+        $params['savename'] = $qr_code_config['imagedir'] . $image_name;     
 
         // echo $params['savename'];
 
@@ -103,7 +104,7 @@ class Qr_code_generate extends CI_Controller
         // $this->user_model->change_userqr($user_id, $image_name);
 
         // then redirect to see image link
-        $file = $params['savename'];
+        echo $file = $params['savename'];
 
         if(file_exists($file)){
             header('Content-Description: File Transfer');

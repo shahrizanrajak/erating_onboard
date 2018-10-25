@@ -26,13 +26,13 @@ function root_url()
 <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
 
 <!-- Ionicons 2.0.0 -->
-<link href="http://localhost/erating/templates/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />
+<link href="/templates/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />
 
 <!-- W3 cardlist by w3schools -->
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
 <!-- Mobile style -->
-<link rel="stylesheet" href="http://localhost/erating/templates/css/mobile.css">
+<link rel="stylesheet" href="/templates/css/mobile.css">
 
 <!-- Include the jQuery library -->
 <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
@@ -43,8 +43,8 @@ function root_url()
 
 <!-- <script src="http://localhost/erating/templates/js/dev/starrr.min.js"></script> -->
 
-<script src="http://localhost/erating/templates/js/dev/mobile.js" type="text/javascript"></script>  
-<script src="http://localhost/erating/templates/js/dev/emotion-ratings.js"></script>
+<script src="/templates/js/dev/mobile.js" type="text/javascript"></script>  
+<script src="/templates/js/dev/emotion-ratings.js"></script>
 
 </head>
 
@@ -148,9 +148,8 @@ function root_url()
             <?php 
             foreach ($soalan as $reason) {
               echo "<option value=". $reason['Id_Soalan'] .">". $reason['Soalan_Ms']."</option>";
-            }
-            ?>                          
-          </select>
+            }?>                          
+        </select>
 
        
 
@@ -236,7 +235,7 @@ $(document).ready(function()
     var uId = $('#user_id').val();
 
     $.ajax({
-      url: 'http://localhost/erating/index.php/mobile/get_rating/'+uId,
+      url: '/index.php/mobile/get_rating/'+uId,
       method: 'GET'
       // type: 'GET',
       // dataType: 'jsonp'      

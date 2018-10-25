@@ -99,20 +99,19 @@ $pdf->AddPage();
 // <p stroke="0.2" fill="true" strokecolor="black" color="blue" style="font-family:helvetica;font-weight:bold;font-size:26pt;">Sistem e-Rating 2.0</p>';
 // $pdf->writeHTML($html, true, false, true, false, '');
 
- 
  $nama=$user['nama'];
  $jawatan=$user['jawatan'];
  $gambar=$user['photo'];
  $uId = $user['id_pengguna'];
  //$cawangan = $user['Cawangan'];
- $noimage = '/erating/templates/images/no-image.png';
+ $noimage = '/templates/images/no-image.png';
 
 
 
 
 // keluarkan QR CODE
 //$pdf->Image( base_url() . 'global/tmp/qr_codes/' . $uId . '.png' , 100, 50, 75, 80); 
-$pdf->Image( base_url() . 'global/tmp/qr_codes/' . $uId . '.png' , 57, 153, 98, 98); 
+$pdf->Image( $this->config->item(base_url) . 'global/tmp/qr_codes/' . $uId . '.png' , 57, 153, 98, 98); 
 
 // keluarkan gambar
 //$pdf->Image( $gambar , 20, 50, 70, 80);
@@ -129,8 +128,7 @@ else
 
 
 
-
-$pdf->Write(75, ''.$nama.'' , '', 0, 'C', true, 0, false, false, 0);
+$pdf->Write(70, ''.$nama.'' , '', 0, 'C', true, 0, false, false, 0);
 $html = <<<EOD
 EOD;
  

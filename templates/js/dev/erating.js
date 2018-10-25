@@ -433,25 +433,23 @@
 
 
         $('#btnGenerateQrcode').click(function() {   
-          // alert('yes');
+          //alert('yes');
           var uId = $('#userId').val();  
 
-          //window.open('http://localhost/erating/index.php/qrcode/'+uId, '_blank');
-          url = "<img src='/erating/index.php/qrcode/"+uId+"' width='100px'>"; 
-          url2 = "/index.php/dashboard"; 
+         //window.open( base_url() . 'index.php/qrcode/'+uId, '_blank');
+          url = "<img src='/index.php/qrcode/"+uId+"' width='100px'>"; 
+          // url2 = "/index.php/dashboard"; 
           $('.modal-body #qr_image_preview').html(url);
-          $('.modal-body #qr_image_preview').load(url2); //test functionn load
+          // $('.modal-body #qr_image_preview').load(url2); //test functionn load
          });
 
         // button Cetak
 
-        $('#btnCetak').click(function() {
-
-            alert('Sila Masukkan Gambar')  
+        $('#btnCetak').click(function() {  
 
             var uId = $('#userId').val();        
-            window.open("/erating/index.php/qrcodepdf/" + uId); 
-               
+            window.open("/index.php/qrcodepdf/" + uId); 
+     
         });
 
         
