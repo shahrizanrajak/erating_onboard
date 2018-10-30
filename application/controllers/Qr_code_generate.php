@@ -12,7 +12,7 @@ class Qr_code_generate extends CI_Controller
         $this->load->model('user_model');
         $this->load->library('ci_qr_code');
         $this->config->load('qr_code');
-        $this->load->library('Pdf');
+        $this->load->library('pdf');
 
     }
 

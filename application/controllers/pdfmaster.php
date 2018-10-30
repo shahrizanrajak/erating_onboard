@@ -2,8 +2,8 @@
 class Pdfmaster extends CI_Controller{
 function __construct() {
         parent::__construct();
-        $this->load->library('Pdf');
-        $this->load->library('Pdf');
+        $this->load->library('pdf');
+        $this->load->library('pdf');
     }
 
        public function generate_pdf() {
