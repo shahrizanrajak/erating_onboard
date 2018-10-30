@@ -143,7 +143,7 @@
                 <div class="info-box-content"
                   onMouseOver="this.style.cursor='pointer'"
                   onclick="javascript:location.href='<?php echo base_url(); ?>index.php/erating-list'">                
-                  <span class="info-box-text">Agensi e-Rating</span>
+                  <span class="info-box-text">Agensi e-Rating TEST</span>
                   <span id="txtTotalAgencyActive" class="info-box-number"><?php echo $stats_agency_active; ?></span>
                   <!-- <span id="txtTotalAgencyActive" class="info-box-number"><?php echo $stats_user_active; ?></span> -->
                 </div><!-- /.info-box-content -->
