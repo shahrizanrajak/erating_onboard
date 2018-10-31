@@ -2,7 +2,7 @@
 
 require_once dirname(__FILE__) . '/tcpdf/tcpdf.php';
 
-class Pdf extends TCPDF
+class pdf extends TCPDF
 {
     function __construct()
     {
