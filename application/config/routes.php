@@ -67,7 +67,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 $route['404_override'] = '';
 $route['default_controller'] = 'administrator'; 
 
-
 // Administrator
 $route['administrator'] = 'administrator';
 $route['dashboard'] = 'administrator/dashboard';
@@ -175,4 +174,5 @@ $route['mobile/rate/(:any)'] = 'mobile/rate/$1';
 $route['mobile/get_rating/(:any)'] = 'mobile/get_rating/$1';
 $route['mobile/rateit/(:any)/(:any)/(:any)/(:any)'] = 'mobile/rate_it_mobile/$1/$2/$3/$4';
 
-//
+//Statistik
+$route['statistik/harian'] = 'statistik/harian';
