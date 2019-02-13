@@ -24,6 +24,15 @@ class Report extends CI_Controller {
 		$this->load->library(array('session'));	
 		$this->load->helper('url');
 
+		if (!($this->session->userdata('logged_user'))) {
+		  $this->session->set_userdata('logged_id', "pelawat");
+		  $this->session->set_userdata('logged_ic', "841010101010");
+		  $this->session->set_userdata('logged_user', "Pelawat Statistik");
+		  $this->session->set_userdata('role', "Pelawat");
+		  $this->session->set_userdata('email', "pelawat@test.com");
+		  $this->session->set_userdata('agency', "101115002");
+		}
+
  		// if (($this->session->userdata('logged_user')) && ($this->session->userdata('role') == 'Pentadbir Utama')) {
  		if ($this->session->userdata('logged_user')) {
  			$user_logged = $this->session->userdata('logged_user');
