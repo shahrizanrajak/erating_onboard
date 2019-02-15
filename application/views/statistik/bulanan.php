@@ -4,7 +4,7 @@ $(document).ready(function()
     var base_url = "<?php echo base_url(); ?>";
     var domain = "<?php echo mydomain; ?>";
 
-    /* Generating Graph*/
+   /* Generating Graph*/
     $.ajax({
        url: domain+'index.php/api/report-rated-monthly',
        success: function (response) 
@@ -47,7 +47,20 @@ $(document).ready(function()
           });          
        }
     });
-    /* End Generating Graph*/
+   
 
-});
 </script>
+
+<body>
+
+  <div class="box box-solid">
+              <div class="nav-tabs-custom">                
+                <ul class="nav nav-tabs pull-right">                                                
+                  <li class="pull-left header"><i class="fa fa-bar-chart"></i> Jumlah Rating Bulanan Tahun <?php echo date("Y"); ?></li>
+                </ul>
+                <div class="tab-content no-padding">                  
+                  <div class="chart" id="stats-monthly" style="position: relative; height: 362px;"></div>  </div>
+              </div>  
+              </div> 
+  
+</body>
