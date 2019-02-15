@@ -261,64 +261,7 @@
                     </div><!-- /.col -->
                   </div><!-- /.row -->
                 </div><!-- /.box-body -->
-              </div><!-- /.box -->
-
-<!--   mula bar graf rating hari ini -->
-
-             <!--   <div class="box box-default">
-                <div class="box-header with-border">
-                  <h3 class="box-title">Rating Hari Ini Bar</h3>
-                  <div class="box-tools pull-right">
-                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                  </div>
-                </div>
-
-              
-                <div class="box-body">
-                  <div class="row"> -->
-                    <!-- <div class="col-md-7"> -->
-
-                    <!-- <div class="chart" id="stats-rate" style=" height: 165px;"></div> -->
-                    
-                    <!-- </div> -->
-                    <!-- /.col -->
-                    <!-- <div class="col-md-5">
-                      <ul class="chart-legend clearfix">
-                        <li><i class="fa fa-circle-o text-aqua"></i> Cemerlang</li>
-                        <li><i class="fa fa-circle-o text-green"></i> Memuaskan</li>
-                        <li><i class="fa fa-circle-o text-gray"></i> Sederhana Memuaskan</li>
-                        <li><i class="fa fa-circle-o text-yellow"></i> Kurang Memuaskan</li>                      
-                        <li><i class="fa fa-circle-o text-red"></i> Tidak Memuaskan</li>
-                      </ul>
-                    </div><!-- /.col --> 
-                  <!-- </div>/.row -->
-                <!-- </div>/.box-body -->
-              <!-- </div>/.box -->
-
-<!--   akhir bar graf rating hari ini -->
-
-              <!-- <div class="box box-default"> -->
-                <!-- <div class="box-header with-border"> -->
-                  <!-- <h3 class="box-title">3 Rating Tertinggi Hari Ini</h3> -->
-                  <!-- <div class="box-tools pull-right"> -->
-                    <!-- <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button> -->
-                    <!-- <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i> </button> -->
-                  <!-- </div> -->
-                <!-- </div>/.box-header -->
-                <!-- <div class="box-footer no-padding"> -->
-                  <!-- <ul class="nav nav-pills nav-stacked">                    
-                      <?php 
-                        // foreach ($stats_agency_top_three as $agency) {
-                          // echo "<option value=". $ministry['Kod_Kem'] .">". $ministry['Kod_Kem']." ". $ministry['Kementerian'] ."</option>";
-                          // echo '<li><a href="#">'. $agency["branch"] .'<span class="pull-right text-green">'. $agency["total"]  .'</span></a></li>';
-                        // }
-                      ?>                                        
-                  </ul> -->
-                <!-- </div>/.footer -->
-              <!-- </div><!-- /.box -->                                        
-                <!-- /.box -->
-            </section><!-- /.Left col -->       
+              </div><!-- /.box -->   
 
 
             <!-- Right col    Rating Bulanan   -->

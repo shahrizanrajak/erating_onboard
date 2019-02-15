@@ -6,7 +6,7 @@ $(document).ready(function()
 
    /* Generating Graph*/
     $.ajax({
-       url: domain+'index.php/api/report-rated-monthly',
+       url: base_url+'index.php/api/report-rated-monthly',
        success: function (response) 
        {            
           var datachart = JSON.parse(response);
@@ -64,22 +64,5 @@ $(document).ready(function()
               </div>  
               </div>    
             </section><!-- /.Right col -->   
-
-              <!-- Right col    Rating mingguan   -->
-            <section class="col-lg-7 connectedSortable">
-              <div class="box box-solid">
-              <div class="nav-tabs-custom">                
-                <ul class="nav nav-tabs pull-right">                  
-                  
-                            
-                  <li class="pull-left header"><i class="fa fa-bar-chart"></i> Tahap Rating Bulanan</li>
-                </ul>
-                 
-                  
-                  <div class="chart" id="stats-weekly" style=" height: 362px;"></div>                                                            
-            
-              </div>  
-              </div>    
-            </section><!-- /.Right col -->  
   
 </body>
