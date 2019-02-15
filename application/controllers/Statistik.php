@@ -19,6 +19,14 @@ class Statistik extends CI_Controller {
 		$this->load->view('statistik/footer');
 	}
 
+	public function bulanan() {
+		$data['status'] = 'Ini adalah testing';
+
+		$this->load->view('statistik/header');
+		$this->load->view('statistik/bulanan', $data);
+		$this->load->view('statistik/footer');
+	}
+
 }
 
 /* End of file Statistik.php */

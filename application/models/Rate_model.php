@@ -18,7 +18,7 @@ class Rate_model extends CI_Model {
         
         
         $this->today = date("Y-m-d");
-        $this->year = "2018";
+        $this->year = "2019";
       //  $this->year = date("Y");       
         
         // echo $this->today;            

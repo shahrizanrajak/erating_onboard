@@ -176,3 +176,4 @@ $route['mobile/rateit/(:any)/(:any)/(:any)/(:any)'] = 'mobile/rate_it_mobile/$1/
 
 //Statistik
 $route['statistik/harian'] = 'statistik/harian';
+$route['statistik/bulanan'] = 'statistik/bulanan';
