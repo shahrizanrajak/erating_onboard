@@ -53,7 +53,8 @@ $(document).ready(function()
 
 <body>
 
-  <div class="box box-solid">
+   <section class="col-lg-7 connectedSortable">
+              <div class="box box-solid">
               <div class="nav-tabs-custom">                
                 <ul class="nav nav-tabs pull-right">                                                
                   <li class="pull-left header"><i class="fa fa-bar-chart"></i> Jumlah Rating Bulanan Tahun <?php echo date("Y"); ?></li>
@@ -61,6 +62,24 @@ $(document).ready(function()
                 <div class="tab-content no-padding">                  
                   <div class="chart" id="stats-monthly" style="position: relative; height: 362px;"></div>  </div>
               </div>  
-              </div> 
+              </div>    
+            </section><!-- /.Right col -->   
+
+              <!-- Right col    Rating mingguan   -->
+            <section class="col-lg-7 connectedSortable">
+              <div class="box box-solid">
+              <div class="nav-tabs-custom">                
+                <ul class="nav nav-tabs pull-right">                  
+                  
+                            
+                  <li class="pull-left header"><i class="fa fa-bar-chart"></i> Tahap Rating Bulanan</li>
+                </ul>
+                 
+                  
+                  <div class="chart" id="stats-weekly" style=" height: 362px;"></div>                                                            
+            
+              </div>  
+              </div>    
+            </section><!-- /.Right col -->  
   
 </body>
