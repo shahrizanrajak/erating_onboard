@@ -140,7 +140,7 @@ function root_url()
         <div id="myRating"></div><br />
 
         <div id="ratingname"></div>
-
+test
 
 
         <select class="form-control" id="soalan" style="display:none">
