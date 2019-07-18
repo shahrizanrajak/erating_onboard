@@ -71,13 +71,15 @@ function root_url()
     <inupt type="button" id="btnBackToCheck" class="ion-android-arrow-back header-back"></input> &nbsp; Maklumat Agensi
     <span id="btnBackToCheck" class="glyphicon glyphicon-chevron-left"></span>  &nbsp; Maklumat Agensi
   </div> -->
-  <div class="imglogo" style="padding-top:50px;" align="center">
-   <!-- <img src="http://appgen.gamma.malaysia.gov.my/uploads/5707/media/170608/42629565.png"  width="300"> -->
-  </div> 
   <div>
-    <center><img src='<?php echo base_url(); ?>templates/images/thumbs.png' border='0' /></centera>
-</div>
+    <center><img src='<?php echo base_url(); ?>templates/images/login-header.jpg' border='0' /></center><br />
+    <center><img src='<?php echo base_url(); ?>templates/images/thumbs.png' border='0' /></center>
+  </div>
+  <hr class='style-one' />
   <h2><center>TERIMA KASIH</center></h2>
+  <hr class='style-one' />
+  <center><img src='<?php echo base_url(); ?>templates/images/login-footer.jpg' border='0' /></center><br />
+
   <!-- <div class="form-group" align="center">    
     <input type="hidden" class="form-control" id="code_agency">
     <br>
@@ -129,8 +131,8 @@ function root_url()
       <input type="hidden" class="form-control" id="agency_id" value="<?php echo $agency_id; ?>">       
       <input type="hidden" class="form-control" id="counter_id" value="<?php echo $counter_id; ?>">   
           
-      <h2><div id="counter_name"><div></h2>
-<hr />
+      <h2 style='max-width: 90%'><div id="counter_name"><div></h2>
+      <hr class='style-one' />
       <div align="center">
       <!--     
         <div class='starrr'></div>
@@ -142,50 +144,37 @@ function root_url()
         <!-- <div class='starrr' data-numstars='8' data-connected-input='rating'></div> -->
         
 
-        <div id="myRating" style='display:none;'></div><br />
-        <div id="ratingname"></div>
+        <div id="myRating" style='display:none;'></div>
+        <div id="ratingname" style='display:none;'></div>
 
         <?php
         /*
         alert($('[name=new-rating]:checked').val())
         */
         ?>
-        <!-- <div class='smiley-container'>
-          <div style='order: 1' class='smiley-item'>
+        <div class='smiley-container'>
+          <?php for ($i=5; $i>0; $i--) { ?>
+          <div style='order: <?php echo $i; ?>' class='smiley-item'>
             <label>
-              <input type="radio" name="new-rating" value="5" onClick='semak_new(this.value)'>
-              <div>😁 Cemerlang</div>
+              <input type="radio" name="new-rating" value="<?php echo $i; ?>" onClick='semak_new(this.value)'>
+              <div>
+                <img src='<?php echo $smiley_image[$smiley_data[$i-1]['Id_Smiley']]; ?>' width='20' />
+                <font size="4"><?php echo $smiley_data[$i-1]['Caption_Ms']; ?></font><br />
+                <!-- <font size="3.5" color="red"><i><?php echo $smiley_data[$i-1]['Caption_En']; ?></i></font> -->
+              </div>
             </label>
           </div>
-          <div style='order: 2' class='smiley-item'>
-            <label>
-              <input type="radio" name="new-rating" value="4" onClick='semak_new(this.value)'>
-              <div>😊 Memuaskan</div>
-            </label>
-          </div>
-          <div style='order: 3' class='smiley-item'>
-            <label>
-              <input type="radio" name="new-rating" value="3" onClick='semak_new(this.value)'>
-              <div>🙂 Sederhana Memuaskan</div>
-            </label>
-          </div>
-          <div style='order: 4' class='smiley-item'>
-            <label>
-              <input type="radio" name="new-rating" value="2" onClick='semak_new(this.value)'>
-              <div>😔 Kurang Memuaskan</div>
-            </label>
-          </div>
-          <div style='order: 5' class='smiley-item'>
-            <label>
-              <input type="radio" name="new-rating" value="1" onClick='semak_new(this.value)'>
-              <div>😡 Tidak Memuaskan</div>
-            </label>
-          </div>
+          <?php 
+            if ($config_data['Smiley'] == 3) { 
+              $i=$i+1;                         
+            }
+          }
+          ?>
           <br />
-        </div> -->
+        </div>
 
         <!-- counter display smiley -->
-        <div class='smiley-container'>
+        <!-- <div class='smiley-container'>
         <?php for ($i=5; $i>0; $i--) { ?>
           <div style='order: <?php echo $i; ?>' class='smiley-item'>
           <label>
@@ -203,10 +192,10 @@ function root_url()
             </div>
           </div><br />
         <?php } ?>
-        </div>
+        </div> -->
 
 
-        <select class="form-control" id="soalan" style="display:none">
+        <select class="form-control btn_erating" id="soalan" style="display:none">
             <option value=''>Sila Pilih Sebab</option>
             <?php 
             foreach ($soalan as $reason) {
@@ -217,7 +206,7 @@ function root_url()
        
 
         <!-- <input type='text' id='myRatings' name='myRatings' value='' style="text-align:center; font-size:40px" placeholder="Pilihan anda.."/>   -->
-        <button id="btnRate" class="btn btn-block btn-primary">Hantar</button>   
+        <br /><button id="btnRate" class="btn_erating btn-block btn-primary">Hantar</button>   
       </div>       
     </div>
   </div>
