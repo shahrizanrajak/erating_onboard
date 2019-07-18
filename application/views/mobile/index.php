@@ -150,7 +150,7 @@ function root_url()
         alert($('[name=new-rating]:checked').val())
         */
         ?>
-        <div class='smiley-container'>
+        <!-- <div class='smiley-container'>
           <div style='order: 1' class='smiley-item'>
             <label>
               <input type="radio" name="new-rating" value="5" onClick='semak_new(this.value)'>
@@ -182,10 +182,10 @@ function root_url()
             </label>
           </div>
           <br />
-        </div>
+        </div> -->
 
         <!-- counter display smiley -->
-        <!-- <div class='smiley-container'>
+        <div class='smiley-container'>
         <?php for ($i=5; $i>0; $i--) { ?>
           <div style='order: <?php echo $i; ?>' class='smiley-item'>
           <label>
@@ -203,7 +203,7 @@ function root_url()
             </div>
           </div><br />
         <?php } ?>
-        </div> -->
+        </div>
 
 
         <select class="form-control" id="soalan" style="display:none">
