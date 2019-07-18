@@ -6,14 +6,18 @@ class Mobile extends CI_Controller {
 
 	public function __construct() 
 	{
-		parent::__construct();		
+		parent::__construct();
+		// $this->load->library(array('session'));	
+		$this->load->helper('url');
+
 		$this->load->model('user_model');		
 		$this->load->model('department_model');		
 		$this->load->model('branch_model');		
 		$this->load->model('question_model');	
 
 		// $this->load->model('rate_model'); 
-		// $this->load->model('photo_model');		
+		$this->load->model('photo_model');
+		$this->load->model('smiley_model');
 	} 
 
 	public function index()
@@ -33,6 +37,14 @@ class Mobile extends CI_Controller {
 		$data['id']	= $id;
 		$data['soalan'] = $this->question_model->list_active();
 			
+		//icon
+		$data['smiley_data'] = $this->smiley_model->list_active();	
+		$smiley_image = $this->photo_model->get_smiley();	
+		foreach ($smiley_image as $key => $smiley) {
+			$smileys[$smiley['parentid']] = $smiley['photo'];			
+		}
+		$data['smiley_image'] = $smileys;	
+
 		$this->load->view('mobile/index', $data);
 	}	
 

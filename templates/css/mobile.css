@@ -97,4 +97,46 @@ overflow:hidden;
     font-family: Roboto,Calibri,Arial !important;
     font-size:20px;
   }
+
+  /* FARID TAMBAH */
+  .smiley-container {
+    flex-direction: column;
+    align-content: flex-start;
+    align-self: center;
+    max-width: 300px;
+    /* background: gray; */
+  }
+  .smiley-item {
+    /* text-align: left; */
+    font-size: large;
+  }
+  .smiley-item label {
+    width: 100%;
+    margin: 5px;
+    padding: 5px;
+    cursor: pointer;
+  }
+
+  /* HIDE RADIO */
+  [type=radio] { 
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  /* IMAGE STYLES */
+  [type=radio] + img {
+    cursor: pointer;
+  }
+
+  /* CHECKED STYLES */
+  [type=radio]:checked + div {
+    /* outline: 2px solid #f00; */
+    padding: 10px;
+    border: 3px dashed #ccc;
+    /* text-align: center; */
+  }
+
+  
 </style>
