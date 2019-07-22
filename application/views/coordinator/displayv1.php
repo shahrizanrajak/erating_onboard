@@ -58,7 +58,7 @@
         <table  width="80%" cellspacing="0" cellpadding="10" border="0" align="center">          
           <input type="hidden" id="set-agency" value="<?php echo $this->session->userdata('agency'); ?>" />
           <input type="hidden" id="set-user" value="<?php echo $this->session->userdata('logged_id'); ?>" />
-          <input type="hidden" id="domain" name="domain" value="<?php echo mydomain; ?>">
+          <input type="hidden" id="domain" name="domain" value="<?php echo base_url(); ?>">
            <tr>
             <td align="center">
               <font size="4.5" color="#000000"><?php echo date('l'); ?>, <span id="servertime"></span></font> <br />              

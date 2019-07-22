@@ -5,7 +5,9 @@
   <?php 
 function root_url()
 {
-  return $_SERVER['HTTP_HOST'] . '/';
+  // return $_SERVER['HTTP_HOST'] . '/';
+  // return $_SERVER['HTTP_HOST'] . '/erating_onboard/';
+  return base_url();
 }
 ?>
 
@@ -21,18 +23,18 @@ function root_url()
 
 <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />  -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-<!-- <link href="http://www.erating.com/templates/css/font-awesome.min.css" rel="stylesheet" type="text/css" /> -->
+<!-- <link href="http://www.erating.com<?php echo base_url(); ?>templates/css/font-awesome.min.css" rel="stylesheet" type="text/css" /> -->
 
 <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
 
 <!-- Ionicons 2.0.0 -->
-<link href="/templates/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />
+<link href="<?php echo base_url(); ?>templates/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />
 
 <!-- W3 cardlist by w3schools -->
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
 <!-- Mobile style -->
-<link rel="stylesheet" href="/templates/css/mobile.css">
+<link rel="stylesheet" href="<?php echo base_url(); ?>templates/css/mobile.css">
 
 <!-- Include the jQuery library -->
 <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
@@ -41,17 +43,17 @@ function root_url()
 <!-- Include the jQuery Mobile library -->
 <!-- <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script> -->
 
-<!-- <script src="http://localhost/erating/templates/js/dev/starrr.min.js"></script> -->
+<!-- <script src="http://localhost/erating<?php echo base_url(); ?>templates/js/dev/starrr.min.js"></script> -->
 
-<script src="/templates/js/dev/mobile.js" type="text/javascript"></script>  
-<script src="/templates/js/dev/emotion-ratings.js"></script>
+<script src="<?php echo base_url(); ?>templates/js/dev/mobile.js" type="text/javascript"></script>  
+<script src="<?php echo base_url(); ?>templates/js/dev/emotion-ratings.js"></script>
 
 </head>
 
 <!--  Check Agency -->
 <div class="page-check" align="center">  
   <div class="imglogo" style="padding-top:50px;" align="center">
-   <img src="http://appgen.gamma.malaysia.gov.my/uploads/5707/media/170608/42629565.png"  width="200">
+   <!-- <img src="http://appgen.gamma.malaysia.gov.my/uploads/5707/media/170608/42629565.png"  width="200"> -->
   </div>  
    <div class="form-group" align="center">
     Masukkan Kod Agensi:<br>
@@ -70,8 +72,11 @@ function root_url()
     <span id="btnBackToCheck" class="glyphicon glyphicon-chevron-left"></span>  &nbsp; Maklumat Agensi
   </div> -->
   <div class="imglogo" style="padding-top:50px;" align="center">
-   <img src="http://appgen.gamma.malaysia.gov.my/uploads/5707/media/170608/42629565.png"  width="300">
+   <!-- <img src="http://appgen.gamma.malaysia.gov.my/uploads/5707/media/170608/42629565.png"  width="300"> -->
   </div> 
+  <div>
+    <center><img src='<?php echo base_url(); ?>templates/images/thumbs.png' border='0' /></centera>
+</div>
   <h2><center>TERIMA KASIH</center></h2>
   <!-- <div class="form-group" align="center">    
     <input type="hidden" class="form-control" id="code_agency">
@@ -121,11 +126,11 @@ function root_url()
     <div align="center">
       <img id="counter_image" class="avatar" src="">
       <input type="hidden" id="user_id" value="<?php echo $id; ?>">  
-      <input type="hidden" class="form-control" id="agency_id">       
-      <input type="hidden" class="form-control" id="counter_id">   
+      <input type="hidden" class="form-control" id="agency_id" value="<?php echo $agency_id; ?>">       
+      <input type="hidden" class="form-control" id="counter_id" value="<?php echo $counter_id; ?>">   
           
       <h2><div id="counter_name"><div></h2>
-
+<hr />
       <div align="center">
       <!--     
         <div class='starrr'></div>
@@ -137,10 +142,68 @@ function root_url()
         <!-- <div class='starrr' data-numstars='8' data-connected-input='rating'></div> -->
         
 
-        <div id="myRating"></div><br />
-
+        <div id="myRating" style='display:none;'></div><br />
         <div id="ratingname"></div>
-test
+
+        <?php
+        /*
+        alert($('[name=new-rating]:checked').val())
+        */
+        ?>
+        <!-- <div class='smiley-container'>
+          <div style='order: 1' class='smiley-item'>
+            <label>
+              <input type="radio" name="new-rating" value="5" onClick='semak_new(this.value)'>
+              <div>😁 Cemerlang</div>
+            </label>
+          </div>
+          <div style='order: 2' class='smiley-item'>
+            <label>
+              <input type="radio" name="new-rating" value="4" onClick='semak_new(this.value)'>
+              <div>😊 Memuaskan</div>
+            </label>
+          </div>
+          <div style='order: 3' class='smiley-item'>
+            <label>
+              <input type="radio" name="new-rating" value="3" onClick='semak_new(this.value)'>
+              <div>🙂 Sederhana Memuaskan</div>
+            </label>
+          </div>
+          <div style='order: 4' class='smiley-item'>
+            <label>
+              <input type="radio" name="new-rating" value="2" onClick='semak_new(this.value)'>
+              <div>😔 Kurang Memuaskan</div>
+            </label>
+          </div>
+          <div style='order: 5' class='smiley-item'>
+            <label>
+              <input type="radio" name="new-rating" value="1" onClick='semak_new(this.value)'>
+              <div>😡 Tidak Memuaskan</div>
+            </label>
+          </div>
+          <br />
+        </div> -->
+
+        <!-- counter display smiley -->
+        <div class='smiley-container'>
+        <?php for ($i=5; $i>0; $i--) { ?>
+          <div style='order: <?php echo $i; ?>' class='smiley-item'>
+          <label>
+            <input type="radio" name="new-rating" value="<?php echo $i; ?>" onClick='semak_new(this.value)'>
+            <div>  
+              <img 
+              class="set-smiley " data-smiley="<?php echo $i?>" style="max-height: 100; max-width: 100" 
+              id="preview-smiley" src="<?php echo $smiley_image[$smiley_data[$i-1]['Id_Smiley']]; ?>" alt="User Image" />  
+            
+              <br /><font size="4"><?php echo $smiley_data[$i-1]['Caption_Ms']; ?></font>
+              <br /><font size="3.5" color="red"><i><?php echo $smiley_data[$i-1]['Caption_En']; ?></i></font>
+              <?php if ($config_data['Smiley'] == 3) { 
+                $i=$i+1;                         
+              } ?>
+            </div>
+          </div><br />
+        <?php } ?>
+        </div>
 
 
         <select class="form-control" id="soalan" style="display:none">
@@ -231,11 +294,11 @@ $("#myRating").emotionsRating({
 $(document).ready(function()
 {  
 
-    // var root = '<?php echo root_url(); ?>';
+    var root = '<?php echo root_url(); ?>';
     var uId = $('#user_id').val();
 
     $.ajax({
-      url: '/index.php/mobile/get_rating/'+uId,
+      url: root + '/index.php/mobile/get_rating/'+uId,
       method: 'GET'
       // type: 'GET',
       // dataType: 'jsonp'      

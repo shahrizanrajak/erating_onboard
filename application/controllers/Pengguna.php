@@ -114,7 +114,7 @@ class Pengguna extends CI_Controller {
 	}		
 
 	public function erating_list() 
-	{								
+	{					
 		
 		$data['ministry_data']	=  $this->ministry_model->list_all();		
 		$data['question_data'] = $this->question_model->list_active();
@@ -131,7 +131,7 @@ class Pengguna extends CI_Controller {
 		$this->load->view('admin/header');
 		$this->load->view('pengguna/erating', $data);		
 		$this->load->view('admin/footer');
-	}			
+	// }			
 
 		// List User Roles
 		if ($this->session->userdata('role') == 'Pentadbir Utama') {
@@ -139,17 +139,16 @@ class Pengguna extends CI_Controller {
 								'Pentadbir'=>'Pentadbir',
 								'Pengguna'=>'Pengguna',
 								'Kaunter'=>'Kaunter');
-		} else if ($this->session->userdata('role') == 'Pentadbir') {
+		} elseif ($this->session->userdata('role') == 'Pentadbir') {
 			$data['roles'] =  array(
 								'Pentadbir'=>'Pentadbir',
 								'Pengguna'=>'Pengguna',
 								'Kaunter'=>'Kaunter');
-		} else ($this->session->userdata('role') == 'Pengguna') {
+		} elseif ($this->session->userdata('role') == 'Pengguna') {
 			$data['roles'] =  array(
 								'Pengguna'=>'Pengguna',
 								'Kaunter'=>'Kaunter');
-
-
+		}
 
 		$this->load->view('admin/header');
 		$this->load->view('pengguna/erating', $data);		
@@ -199,31 +198,31 @@ class Pengguna extends CI_Controller {
 		$this->load->view('admin/footer');
 	}	
 
-	public function user_view() 
-	{								
-		$data['ministry_data']	=  $this->ministry_model->list_all();
-		$data['question_data'] = $this->question_model->list_active();
-		$data['user_data'] = $this->user_model->list_all();		
+	// public function user_view() 
+	// {								
+	// 	$data['ministry_data']	=  $this->ministry_model->list_all();
+	// 	$data['question_data'] = $this->question_model->list_active();
+	// 	$data['user_data'] = $this->user_model->list_all();		
 
-		// get user photo	
-		$data['avatar'] = self::get_image('photo', $this->session->userdata('logged_id'));
-		// if ($avatar = $this->photo_model->get_photo($this->session->userdata('logged_id'))) {
-		// 	$data['avatar'] = $avatar['photo'];
-		// } else {
-		// 	$data['avatar'] = base_url().'templates/adminlte/dist/img/avatar.png';
-		// }				
+	// 	// get user photo	
+	// 	$data['avatar'] = self::get_image('photo', $this->session->userdata('logged_id'));
+	// 	// if ($avatar = $this->photo_model->get_photo($this->session->userdata('logged_id'))) {
+	// 	// 	$data['avatar'] = $avatar['photo'];
+	// 	// } else {
+	// 	// 	$data['avatar'] = base_url().'templates/adminlte/dist/img/avatar.png';
+	// 	// }				
 
-		// List User Roles
-		$data['roles'] = $this->setRole();
+	// 	// List User Roles
+	// 	$data['roles'] = $this->setRole();
 
-		// Define JSON API
-		$data['status_type'] = 'Senarai Workspace eRating';				
-		$data['json_data'] = 'api/erating-data/list';
+	// 	// Define JSON API
+	// 	$data['status_type'] = 'Senarai Workspace eRating';				
+	// 	$data['json_data'] = 'api/erating-data/list';
 
-		$this->load->view('admin/header');
-		$this->load->view('pengguna/user', $data);		
-		$this->load->view('admin/footer');
-	}	
+	// 	$this->load->view('admin/header');
+	// 	$this->load->view('pengguna/user', $data);		
+	// 	$this->load->view('admin/footer');
+	// }	
 
 	// public function get_photo($type, $id)
 	// {		

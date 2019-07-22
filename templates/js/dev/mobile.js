@@ -4,7 +4,7 @@ $(document).ready(function()
   var API_LOGIN = 6410;
   var API_REGISTER = 6419;
   var API_LIST = 6557;
-  var root = '/erating';
+  var root = '/erating_onboard';
 
   // http://www.jqueryscript.net/other/Easy-Five-Star-Rating-Plugin-with-jQuery-Font-Awesome-starrr.html
   $('.starrr:eq(0)').on('starrr:change', function(e, value){
@@ -33,7 +33,6 @@ $(document).ready(function()
 
   $("#btnValidate").click(function(){  
     var codeagency = $("#code").val().toString();   
-
     $.ajax({
       url: root + '/index.php/mobile/find_agency/'+codeagency,
       method: 'GET'
@@ -172,6 +171,7 @@ $(document).ready(function()
     var agency = $('#agency_id').val();
     var counter = $('#counter_id').val();
     var smiley = $('input[name=rating]').val();
+    var smiley = $('[name=new-rating]:checked').val()
     var qselect =  $('#soalan').val();
       // if (smiley < 3)
       // {
@@ -207,7 +207,7 @@ $(document).ready(function()
           // type: "POST", 
           type: "GET", 
           // dataType: "jsonp",
-          url: "/index.php/mobile/rateit/"+agency+"/"+counter+"/"+smiley+"/"+qselect,                                               
+          url: root + "/index.php/mobile/rateit/"+agency+"/"+counter+"/"+smiley+"/"+qselect,                                               
           // data: {data: jsonData},              
           success: function(data) {                          
               // $("#popup-thanks").popup("open"); 
@@ -239,6 +239,14 @@ function semak(count){
   var namasmiley = ["", "Tidak Memuaskan", "Kurang Memuaskan", "Sederhana Memuaskan", "Memuaskan", "Cemerlang"];
   $('#ratingname').text(namasmiley[count]);
   // alert(count);
+  if(count < 3){
+    $('#soalan').show();
+  } else $('#soalan').hide();
+
+}
+
+
+function semak_new(count){
   if(count < 3){
     $('#soalan').show();
   } else $('#soalan').hide();
